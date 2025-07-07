@@ -1,4 +1,4 @@
-import { Badge, Button, Card, Image, Text, Heading, Stack, SimpleGrid, Box } from "@chakra-ui/react";
+import { Badge, Button, Card, Image, Text, Heading, Stack, SimpleGrid, Box} from "@chakra-ui/react";
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import '@/assets/EventCard.css';
 import EditEvent from "@/eventControl/EditEvent";
@@ -7,14 +7,15 @@ import RSVPEvent from "@/eventControl/RSVPEvent";
 import ShareEvent from "@/eventControl/ShareEvent";
 
 
+
 export default function EventCard({ events }) {
 
   return (
     <Box position="sticky" top="0" zIndex="sticky" boxShadow="sm" py={4} px={6}
   _after={{ content: '""', position: "absolute", left: 0, right: 0, bottom: 0, height: "1px",
-  boxShadow: "0 1px 6px rgba(0, 0, 0, 0.1)",}}
+  boxShadow: "0 1px 10px rgba(0, 0, 0, 0.1)",}}
 >
-  <SimpleGrid columns={{ base: 1, md: 2, lg: 3 }} gap={8}>
+  <SimpleGrid columns={{ base: 1, md: 2, lg: 3 }} gap={10}>
 
     {events.map((event) => (
 
@@ -56,13 +57,7 @@ export default function EventCard({ events }) {
               <Route path="/share/:id" element={<ShareEvent />} />
             </Routes>
           </Router>
-          <Button onClick={() => window.location.href = `/rsvp/${event._id}`} colorScheme="blue">RSVP</Button>
-
-
-      
-          <Button onClick={() => window.location.href = `/edit/${event._id}`} colorScheme="yellow">Edit</Button>
-          <Button onClick={() => window.location.href = `/delete/${event._id }`} colorScheme="red">Delete</Button>
-          <Button onClick={() => window.location.href = `/share/${event._id}`} colorScheme="green">Share</Button>
+          <Button onClick={() => window.location.href = `/rsvp/${event._id}`}>RSVP</Button> 
         </Card.Footer>
       </Card.Root>
     ))}
