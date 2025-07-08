@@ -1,76 +1,52 @@
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import { useState, useEffect } from 'react'
-import './App.css'
-import Auth from './auth-admin/Auth'
+import { useState, useEffect } from 'react';
+import './App.css';
+import Auth from './auth-admin/Auth';
 import AdminAuth from './auth-admin/AdminAuth';
-import Events from './eventControl/ScheduledEvents'
-import Navigation from './components/NavBar'
-import Footer from './components/Footer'
-import BackDrop from './components/BackDrop'
-
+import Events from './eventControl/ScheduledEvents';
+import Navigation from './components/NavBar';
+import Footer from './components/Footer';
+import BackDrop from './components/BackDrop';
+import About from './pages/About';
+import Contact from './pages/Contact';
+import Privacy from './pages/PrivacyPolicy';
+import Terms from './pages/TermsOfService';
+import Report from './pages/ReportPost';
+import AddEvents from './eventControl/CreateEvent';
 
 function App() {
-  
-  const [sessionToken, setSessionToken] = useState(undefined)
-  console.log("Value of our session token", sessionToken)
+  const [sessionToken, setSessionToken] = useState(undefined);
 
   useEffect(() => {
     if (localStorage.getItem("token")) {
-      setSessionToken(localStorage.getItem("token"))
+      setSessionToken(localStorage.getItem("token"));
     }
-  }, [])
+  }, []);
 
   const updateLocalStorage = newToken => {
-    localStorage.setItem("token", newToken)
-    setSessionToken(newToken)
-  }
-
-  const MainView = () => {
-    if (!sessionToken) {
-      return (
-        <Router>
-          <Routes>
-            
-            <Route path="/" element={<Auth updateLocalStorage={updateLocalStorage} />} />
-            <Route path="/admin" element={<AdminAuth updateLocalStorage={updateLocalStorage} />} />
-            <Route path="/events" element={<Events sessionToken={sessionToken} />} />
-          </Routes>
-        </Router>
-      );
-    } else {
-      return <Events sessionToken={sessionToken} />;
-    }
+    localStorage.setItem("token", newToken);
+    setSessionToken(newToken);
   };
-  // MainView function determines what to render based on sessionToken
-  // If sessionToken is undefined, it renders the Auth component
-  // If sessionToken is defined, it renders the Events component
-  // The Auth component is responsible for handling user authentication
-  // The AdminAuth component is responsible for handling admin authentication
-  // The Events component displays scheduled events for the user
 
-  
-  
   return (
-    <>
-    <Navigation />
-    <BackDrop />
-    {MainView()}
-    <Footer />
-    </>
-  )
+    <Router>
+      <Navigation />
+      <BackDrop />
+      <Routes>
+        <Route path="/" element={<Auth updateLocalStorage={updateLocalStorage} />} />
+        <Route path="/admin" element={<AdminAuth updateLocalStorage={updateLocalStorage} />} />
+        <Route path="/events" element={<Events sessionToken={sessionToken} />} />
+        <Route path="/about" element={<About />} />
+        <Route path="/contact" element={<Contact />} />
+        <Route path="/privacy" element={<Privacy />} />
+        <Route path="/terms" element={<Terms />} />
+        <Route path="/report" element={<Report sessionToken={sessionToken} />} />
+        <Route path="/addevents" element={<AddEvents sessionToken={sessionToken} />} />
+        {/* Add more routes as needed */}
+      </Routes>
+      <Footer />
+    </Router>
+  );
 }
 
-export default App
-
-// MainView function determines what to render based on sessionToken
-  // If sessionToken is undefined, it renders the Auth component
-  // If sessionToken is defined, it renders the Events component
-  // The Auth component is responsible for handling user authentication
-  // The AdminAuth component is responsible for handling admin authentication
-  // The Events component displays scheduled events for the user
-  // The updateLocalStorage function updates the session token in local storage and state
-  // The sessionToken state is initialized to undefined and updated based on local storage
-  // The useEffect hook is used to check for the session token in local storage when the component mounts
-  // The Navigation component provides navigation links for the application
-  // The LogOut component handles user logout functionality
-  // The Footer component displays the footer of the application
+export default App;

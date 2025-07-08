@@ -1,32 +1,21 @@
-import { BrowserRouter as Router, Routes, Route} from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import React from 'react';
 import '@/assets/Footer.css';
-import  Privacy from '../pages/PrivacyPolicy';
-import Terms from '../pages/TermsOfService';
-import Report from '../pages/ReportPost';
 
 
-
-export default function Footer(sessionToken) {
+export default function Footer() {
 
   return (
     <footer className="footer">
       <div className="footer-inner">
         <p className="footer-logo">🪴 Friendly Fence Bulletin</p>
 
-        <Router>
-          <Routes>
-            <Route path="/privacy" element={<Privacy />} />
-            <Route path="/terms" element={<Terms />} />
-            <Route path="/report" element={<Report sessionToken={sessionToken}/>} />
-          </Routes>
           <nav className="footer-links">
-          <a href='/' className="navbar-link">Home</a>
-          <a href='/privacy' className="navbar-link">Policy</a>
-          <a href='/terms' className="navbar-link">Terms of Service</a>
-          <a href='/report' className="navbar-link">Report a Post</a>
+          <Link to="/" className="navbar-link">Home</Link>
+          <Link to="/privacy" className="navbar-link">Policy</Link>
+          <Link to="/terms" className="navbar-link">Terms of Service</Link>
+          <Link to="/report" className="navbar-link">Report a Post</Link>
           </nav>     
-        </Router>
         
         <p className="footer-address">
           123 Garden Lane, Green City, GC 45678
