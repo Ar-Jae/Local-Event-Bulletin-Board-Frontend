@@ -1,6 +1,8 @@
 import { useState, useEffect } from 'react';
 import '@/assets/Events.css';
 import EventCard from '../components/EventCard';
+import LogOut from '../auth-admin/LogOut'
+
 
 
 
@@ -10,7 +12,7 @@ export default function Events({ sessionToken }) {
   
 
   const fetchEvents = () => {
-    const url = "http://127.0.0.1:4000/events/events";
+    const url = "http://127.0.0.1:4000/api/events/events";
 
     fetch(url, {
       method: "GET",
@@ -31,8 +33,8 @@ export default function Events({ sessionToken }) {
   return (
     <>
     <EventCard events={events} />
-    <button onClick={fetchEvents}>Refresh Events</button>
-    
+    <LogOut />
+
     </>
   );
 }

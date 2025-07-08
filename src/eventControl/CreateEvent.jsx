@@ -1,5 +1,6 @@
 import { useState } from 'react';
-import { Field, Input } from "@chakra-ui/react"
+import { Field, Input, Box, Card, Flex, Heading} from "@chakra-ui/react"
+import '@/assets/CreateEvent.css';
 
 export default function CreateEvent({ sessionToken }) {
   const [Title, setTitle] = useState('');
@@ -26,7 +27,7 @@ export default function CreateEvent({ sessionToken }) {
         Category 
     };
 
-    const url = "http://127.0.0.1:4000/events/event";
+    const url = "http://127.0.0.1:4000/api/events/event";
 
     try {
       const res = await fetch(url, {
@@ -55,8 +56,22 @@ export default function CreateEvent({ sessionToken }) {
   };
 
   return (
-    <>
-      <h2>Add New Event</h2>
+    <Flex minH="83vh" justify="center" align="center">
+
+     <Card.Root bg="blackAlpha.700"
+      rounded="3xl"
+      overflow="hidden"
+      boxShadow="md"
+      transition="all 0.2s"
+      _hover={{ boxShadow: "xl", 
+      transform: "translateY(-2px)"}}>
+
+     <Box
+        position="sticky" top="0" zIndex="sticky" py={4} px={6}
+      >
+        
+      <Heading textAlign="center">Add New Event</Heading>
+      
       <Field.Root required>
       <Field.Label>
       Event <Field.RequiredIndicator />
@@ -69,10 +84,18 @@ export default function CreateEvent({ sessionToken }) {
         placeholder="Enter event name"
         onChange={e => setTitle(e.target.value)}
       />
+
       <Field.Label>
       Description <Field.RequiredIndicator />
       </Field.Label>
       <textarea
+        rows="4"
+        type="text"
+        autoComplete="on"
+        autoCorrect="on"
+        spellCheck="true"
+        maxLength="100"
+        style={{ width: '100%', padding: '8px', border: '2px solid #333' }}
         value={Description}
         name="Description"
         id="Description"
@@ -99,6 +122,7 @@ export default function CreateEvent({ sessionToken }) {
       <Input
         type="date"
         value={DateInput}
+        placeholder="Enter event dare"
         name="DateInput"
         id="DateInput"
         onChange={e => setDateInput(e.target.value)}
@@ -110,6 +134,7 @@ export default function CreateEvent({ sessionToken }) {
       <Input
         type="time"
         value={TimeInput}
+        placeholder="Eg. 12:30"
         name="TimeInput"
         id="TimeInput"
         onChange={e => setTimeInput(e.target.value)}
@@ -144,6 +169,10 @@ export default function CreateEvent({ sessionToken }) {
       
       <button onClick={handleAddEvent}>ADD EVENT</button>
       </Field.Root>
-    </>
+      </Box>
+     </Card.Root>
+    </Flex>
+      
+  
   );
 }

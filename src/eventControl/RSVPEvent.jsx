@@ -26,10 +26,13 @@ export default function RSVPPage() {
           <input type="email" name="email" placeholder="you@example.com" />
         </label>
 
-        <label>
-          Message (optional)<br />
-          <textarea name="message" rows="4" placeholder="Looking forward to it!"></textarea>
-        </label>
+        <label>Will you attend?</label>
+            <select id="attendance" name="attendance">
+            <option value="" disabled selected>Select your response</option>
+            <option value="yes">Yes</option>
+            <option value="no">No</option>
+            <option value="maybe">Maybe</option>
+            </select>
 
         <button type="submit">Submit RSVP</button>
       </form>

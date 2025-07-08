@@ -2,6 +2,7 @@ import React from 'react';
 import '@/assets/ReportPost.css';
 import { useState } from 'react';
 import { Input } from "@chakra-ui/react"
+import { Box, Card, Flex } from "@chakra-ui/react";
 
 export default function ReportPost({ sessionToken }) {
   const [post, setPost] = useState('');
@@ -19,7 +20,7 @@ export default function ReportPost({ sessionToken }) {
       email
     };
 
-    const url = "http://127.0.0.1:4000/reportedPost/report";
+    const url = "http://127.0.0.1:4000/api/reportedPost/report";
 
     try {
       const res = await fetch(url, {
@@ -40,6 +41,22 @@ export default function ReportPost({ sessionToken }) {
   };
 
   return (
+
+    <Flex minH="83vh" justify="center">
+        
+      <Card.Root bg="blackAlpha.700"
+        rounded="3xl"
+        overflow="hidden"
+        boxShadow="md"
+        transition="all 0.2s"
+        _hover={{ boxShadow: "xl", 
+        transform: "translateY(-2px)"}}>
+        
+      <Box
+        position="sticky" top="0" zIndex="sticky" py={4} px={6}
+        textAlign="center"
+      >
+
     <div className="report-container">
       <h1 className="report-title">Report a Post</h1>
 
@@ -83,5 +100,8 @@ export default function ReportPost({ sessionToken }) {
         ⚠️ We don’t tolerate false reports. All reports are reviewed manually and kept confidential.
       </p>
     </div>
+    </Box>
+  </Card.Root>
+</Flex>
   );
 }

@@ -1,8 +1,25 @@
 import React from 'react';
 import '@/assets/TermsOfService.css';
+import { Box, Card, Flex } from "@chakra-ui/react";
 
 export default function TermsOfService() {
   return (
+
+    <Flex minH="83vh" justify="center">
+        
+             <Card.Root bg="blackAlpha.700"
+              rounded="3xl"
+              overflow="hidden"
+              boxShadow="md"
+              transition="all 0.2s"
+              _hover={{ boxShadow: "xl", 
+              transform: "translateY(-2px)"}}>
+        
+             <Box
+                position="sticky" top="0" zIndex="sticky" py={4} px={6}
+                textAlign="center"
+              >
+    
     <div className="tos-container">
       <h1 className="tos-title">Terms of Service</h1>
 
@@ -77,5 +94,8 @@ export default function TermsOfService() {
         </p>
       </section>
     </div>
+    </Box>
+  </Card.Root>               
+</Flex>
   );
 }

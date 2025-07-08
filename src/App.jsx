@@ -5,10 +5,8 @@ import Auth from './auth-admin/Auth'
 import AdminAuth from './auth-admin/AdminAuth';
 import Events from './eventControl/ScheduledEvents'
 import Navigation from './components/NavBar'
-import LogOut from './auth-admin/LogOut'
 import Footer from './components/Footer'
 import BackDrop from './components/BackDrop'
-import SentReports from './auth-admin/SentReports'
 
 
 function App() {
@@ -32,6 +30,7 @@ function App() {
       return (
         <Router>
           <Routes>
+            
             <Route path="/" element={<Auth updateLocalStorage={updateLocalStorage} />} />
             <Route path="/admin" element={<AdminAuth updateLocalStorage={updateLocalStorage} />} />
             <Route path="/events" element={<Events sessionToken={sessionToken} />} />
@@ -41,7 +40,6 @@ function App() {
     } else {
       return <Events sessionToken={sessionToken} />;
     }
-
   };
   // MainView function determines what to render based on sessionToken
   // If sessionToken is undefined, it renders the Auth component
@@ -50,21 +48,13 @@ function App() {
   // The AdminAuth component is responsible for handling admin authentication
   // The Events component displays scheduled events for the user
 
-  const secondaryView = () => {
-    if (!sessionToken) {
-      return <Auth updateLocalStorage={updateLocalStorage} />;
-    } else {
-      return <Events sessionToken={sessionToken} />;
-    }
-  }
+  
   
   return (
     <>
-    <SentReports />
     <Navigation />
     <BackDrop />
-    {MainView() || secondaryView()}
-    <LogOut />
+    {MainView()}
     <Footer />
     </>
   )

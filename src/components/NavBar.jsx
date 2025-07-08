@@ -5,6 +5,7 @@ import '@/assets/NavBar.css';
 import About from '../pages/About';
 import Contact from '../pages/Contact';
 import AddEvents from '@/eventControl/CreateEvent';
+import ShowEvents from '@/eventControl/ScheduledEvents';
 
 
 
@@ -26,7 +27,7 @@ export default function NavBar({ searchTerm, setSearchTerm  }) {
         </a>
 
         <nav className="navbar-links">
-          <a href="/events" className="navbar-link">Add Events</a>
+          <a href="/addevents" className="navbar-link">Add Events</a>
           <a href="./about" className="navbar-link">About</a>
           <a href="/contact" className="navbar-link">Contact</a>
           <a href="/admin" className="navbar-link">Admin Login</a>
@@ -44,7 +45,7 @@ export default function NavBar({ searchTerm, setSearchTerm  }) {
         <Routes>
           <Route path="/About" element={<About />} />
           <Route path="/contact" element={<Contact />} />
-          <Route path="/events" element={<AddEvents sessionToken={sessionToken} />} />
+          <Route path="/addevents" element={<AddEvents sessionToken={sessionToken} />} />
         </Routes>
       </Router>
     </header>

@@ -1,7 +1,23 @@
 import '@/assets/AboutPage.css'; // Import the CSS file
+import { Box, Card, Flex} from "@chakra-ui/react"
 
 export default function AboutPage() {
   return (
+      <Flex minH="100vh" justify="center">
+
+     <Card.Root bg="blackAlpha.700"
+      rounded="3xl"
+      overflow="hidden"
+      boxShadow="md"
+      transition="all 0.2s"
+      _hover={{ boxShadow: "xl", 
+      transform: "translateY(-2px)"}}>
+
+     <Box
+        position="sticky" top="0" zIndex="sticky" py={4} px={6}
+        textAlign="center"
+      >
+
     <div className="about-container">
       <h1 className="about-title">About Friendly Fence Bulletin</h1>
 
@@ -64,5 +80,8 @@ export default function AboutPage() {
         </p>
       </section>
     </div>
+      </Box>
+    </Card.Root>
+ </Flex>
   );
 }

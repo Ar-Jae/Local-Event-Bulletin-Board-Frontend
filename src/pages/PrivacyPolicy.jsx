@@ -1,8 +1,25 @@
 import React from 'react';
 import '@/assets/PrivacyPolicy.css';
+import { Box, Card, Flex } from "@chakra-ui/react";
 
 export default function PrivacyPolicy() {
   return (
+
+    <Flex minH="100vh" justify="center">
+        
+      <Card.Root bg="blackAlpha.700"
+        rounded="3xl"
+        overflow="hidden"
+        boxShadow="md"
+        transition="all 0.2s"
+        _hover={{ boxShadow: "xl", 
+        transform: "translateY(-2px)"}}>
+        
+      <Box
+        position="sticky" top="0" zIndex="sticky" py={4} px={6}
+        textAlign="center"
+      >
+
     <div className="privacy-container">
       <h1 className="privacy-title">Privacy Policy</h1>
 
@@ -60,5 +77,8 @@ export default function PrivacyPolicy() {
         <p>If you have questions about this Privacy Policy, please email us at <a href="mailto:privacy@friendlyfence.com">privacy@friendlyfence.com</a>.</p>
       </section>
     </div>
+    </Box>
+  </Card.Root>
+</Flex>
   );
 }

@@ -1,0 +1,37 @@
+input[type="text"],
+input[type="date"],
+input[type="time"]
+{
+    border: 2px solid #333;
+    color: white;
+    padding: 10px;
+    width: 300px;
+    font-size: 1em;
+    margin: 10px 0;
+}
+
+select {
+    border: 2px solid #333;
+    color: white;
+    padding: 10px;
+    width: 300px;
+    font-size: 1em;
+    margin: 10px 0;
+}
+
+button {
+    margin: 10px;
+    padding: 10px 15px;
+    font-size: 1em;
+    cursor: pointer;
+    border: none;
+    color: white;
+    border-radius: 5px;
+    background-color: #333;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #555;
+}
+

@@ -1,8 +1,25 @@
 import React from 'react';
 import '@/assets/ContactPage.css';
+import { Box, Card, Flex} from "@chakra-ui/react"
 
 export default function ContactPage() {
   return (
+
+    <Flex minH="83vh" justify="center">
+    
+         <Card.Root bg="blackAlpha.700"
+          rounded="3xl"
+          overflow="hidden"
+          boxShadow="md"
+          transition="all 0.2s"
+          _hover={{ boxShadow: "xl", 
+          transform: "translateY(-2px)"}}>
+    
+         <Box
+            position="sticky" top="0" zIndex="sticky" py={4} px={6}
+            textAlign="center"
+          >
+           
     <div className="contact-container">
       <h1 className="contact-title">Contact Us</h1>
 
@@ -53,5 +70,8 @@ export default function ContactPage() {
         </form>
       </section>
     </div>
+    </Box>
+  </Card.Root>
+</Flex>
   );
 }

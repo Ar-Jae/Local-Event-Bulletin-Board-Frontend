@@ -6,9 +6,8 @@ export default function EventReports(sessionToken) {
 
     const [reportedPosts, setReportedPosts] = useState([]);
     
-  
     const fetchEvents = () => {
-      const url = "http://127.0.0.1:4000/reportedPost/reports";
+      const url = "http://127.0.0.1:4000/api/reportedPost/reports";
   
       fetch(url, {
         method: "GET",
