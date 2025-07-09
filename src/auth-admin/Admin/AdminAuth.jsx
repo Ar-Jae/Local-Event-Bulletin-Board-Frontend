@@ -1,15 +1,17 @@
 import React, { useState } from 'react'
-import '@/assets/Auth.css'
+import '@/assets/AdminAuth.css'
 import { Field, Input, Button, Card, Stack } from "@chakra-ui/react"
-import Homepage from '../components/Homepage';
+import Homepage from '@/components/User/Homepage';
 import { useNavigate } from 'react-router-dom';
 
-export default function Auth({ updateLocalStorage }) {
+export default function AdminAuth({ updateLocalStorage }) {
+
   const [login, setLogin] = useState(true)
   const [firstName, setFirstName] = useState("")
   const [lastName, setLastName] = useState("")
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
+
   const navigate = useNavigate();
 
   const toggle = () => {
@@ -20,14 +22,14 @@ export default function Auth({ updateLocalStorage }) {
     setPassword("")
   }
 
-  const toggleBtn = () => login ? "Register" : "Back to Login"
+  const toggleBtn = () => login ? "Request Admin" : "Back to Login"
 
   const handleSubmit = (e) => {
     e.preventDefault()
 
     const url = login
-      ? "http://127.0.0.1:4000/api/auth/login"
-      : "http://127.0.0.1:4000/api/auth/user"
+      ? "http://127.0.0.1:4000/api/adminUser/login"
+      : "http://127.0.0.1:4000/api/adminUser/admin"
 
     const body = login
       ? { email, password }
@@ -56,7 +58,7 @@ export default function Auth({ updateLocalStorage }) {
   return (
     <>
       <Homepage />
-      <h1 className="auth-header">{login ? "Login" : "Register"}</h1>
+      <h1 className='auth-header'>{login ? "Admin Login" : "Admin Register"}</h1>
 
       <form onSubmit={handleSubmit} className="form-wrapper">
 
@@ -97,7 +99,7 @@ export default function Auth({ updateLocalStorage }) {
           // ----------------- REGISTER FORM -----------------
           <Card.Root maxW="sm">
             <Card.Header>
-              <Card.Title>Register</Card.Title>
+              <Card.Title>Register For Admin</Card.Title>
               <Card.Description>
                 Fill in your details to create an account
               </Card.Description>
@@ -151,7 +153,7 @@ export default function Auth({ updateLocalStorage }) {
         {/* -------- BUTTONS -------- */}
         <Stack mt={4} gap={3}>
           <Button type="submit" colorScheme="teal">
-            {login ? "Login" : "Register"}
+            {login ? "Login" : "Submit Request"}
           </Button>
           <Button onClick={toggle} variant="ghost">
             {toggleBtn()}

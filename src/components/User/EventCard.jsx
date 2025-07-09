@@ -2,6 +2,31 @@ import { Badge, Button, Card, Image, Text, Heading, Stack, SimpleGrid, Box,HStac
 import { useNavigate } from 'react-router-dom';
 import '@/assets/EventCard.css';
 
+function formatDateTime(dateString, timeString) {
+  // dateString: "2024-06-07T00:00:00.000Z" or "06/07/2024"
+  // timeString: "14:30"
+  let dateObj;
+  if (dateString.includes('-')) {
+    dateObj = new Date(dateString);
+  } else {
+    // fallback for MM/DD/YYYY
+    dateObj = new Date(Date.parse(dateString));
+  }
+  if (isNaN(dateObj)) return "Invalid Date";
+
+  // Format date as MM/DD/YYYY
+  const month = (dateObj.getMonth() + 1).toString().padStart(2, '0');
+  const day = dateObj.getDate().toString().padStart(2, '0');
+  const year = dateObj.getFullYear();
+
+  // Format time as hh:mm AM/PM
+  let [hour, minute] = timeString.split(':');
+  hour = parseInt(hour, 10);
+  const ampm = hour >= 12 ? 'PM' : 'AM';
+  hour = hour % 12 || 12;
+
+  return `${month}/${day}/${year} at ${hour.toString().padStart(2, '0')}:${minute} ${ampm}`;
+}
 
 export default function EventCard({ events }) {
   const navigate = useNavigate();
@@ -42,8 +67,7 @@ export default function EventCard({ events }) {
             <Card.Description>
               {event.Date && event.Time ? (
                 <>
-                  {new Date(`${event.Date}T${event.Time}`).toLocaleDateString()} at{" "}
-                  {new Date(`${event.Date}T${event.Time}`).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
+                  {formatDateTime(event.Date, event.Time)}
                 </>
               ) : (
                 "Date/Time not available"

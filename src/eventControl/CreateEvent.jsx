@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Field, Input, Box, Card, Flex, Heading, Button, FileUpload, Float, useFileUploadContext } from "@chakra-ui/react"
 import { LuFileImage, LuX } from "react-icons/lu"
 import '@/assets/CreateEvent.css';
@@ -11,35 +12,40 @@ export default function CreateEvent({ sessionToken }) {
   const [TimeInput, setTimeInput] = useState('');
   const [Category, setCategory] = useState('');
   const [Image, setImage] = useState(null); // Store File object
+  const navigate = useNavigate();
 
   const handleAddEvent = async (e) => {
     e.preventDefault();
 
-    const dateTimeString = `${DateInput}T${TimeInput}`;
-    const date = new Date(dateTimeString);
+    // Use the selected date and time to create a Date object
+    const date = new Date(`${DateInput}T00:00:00Z`);
 
-    const formData = new FormData();
-    formData.append('Title', Title);
-    formData.append('Description', Description);
-    formData.append('Location', Location);
-    formData.append('date', date.toISOString());
-    formData.append('time', date.toTimeString().split(' ')[0]);
-    formData.append('Category', Category);
-    if (Image) formData.append('Image', Image);
-
+    const eventData = {
+      Title,
+      Description,
+      Location,
+      Date: date.toISOString(), // Full ISO string for MongoDB
+      Time: TimeInput.slice(0, 5), // HH:MM
+      Category,
+      // Image: Image,
+      ImageUrl: Image ? URL.createObjectURL(Image) : "https://images.unsplash.com/photo-1667489022797-ab608913feeb?auto=format&fit=crop&w=800&q=60" // Use local URL for preview
+    };
+  
     const url = "http://127.0.0.1:4000/api/events/event";
-
+  
     try {
       const res = await fetch(url, {
         method: "POST",
-        body: formData,
         headers: {
-          "authorization": sessionToken
-        }
+          "Content-Type": "application/json",
+          "authorization": sessionToken   
+        },
+        body: JSON.stringify(eventData)
       });
-
+  
       const data = await res.json();
       console.log("Event created:", data);
+      navigate("/events"); // Redirect after successful creation
     } catch (err) {
       console.error(err);
     }
@@ -87,8 +93,12 @@ export default function CreateEvent({ sessionToken }) {
       >
         
       <Heading textAlign="center">Add New Event</Heading>
-      
+
       <Field.Root required>
+      <Field.Label>
+       Page will redirect after successful creation
+      </Field.Label>
+
       <Field.Label>
       Event <Field.RequiredIndicator />
       </Field.Label>
