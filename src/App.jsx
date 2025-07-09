@@ -13,36 +13,69 @@ import Privacy from './pages/PrivacyPolicy';
 import Terms from './pages/TermsOfService';
 import Report from './pages/ReportPost';
 import AddEvents from './eventControl/CreateEvent';
+import SentReports from './components/ReportCard'; // If you want admin to see reports
 
 function App() {
   const [sessionToken, setSessionToken] = useState(undefined);
 
   useEffect(() => {
-    if (localStorage.getItem("token")) {
-      setSessionToken(localStorage.getItem("token"));
+    const token = localStorage.getItem("token");
+    console.log("Token from localStorage:", token); // Debugging token retrieval
+    if (token) {
+      setSessionToken(token);
     }
   }, []);
 
   const updateLocalStorage = newToken => {
+    console.log("Updating localStorage with token:", newToken); // Debugging token update
     localStorage.setItem("token", newToken);
     setSessionToken(newToken);
   };
+
+  // Simple role check (replace with real logic as needed)
+  const isAdmin = sessionToken && sessionToken.startsWith("admin-");
 
   return (
     <Router>
       <Navigation />
       <BackDrop />
       <Routes>
+        {/* Login routes */}
         <Route path="/" element={<Auth updateLocalStorage={updateLocalStorage} />} />
         <Route path="/admin" element={<AdminAuth updateLocalStorage={updateLocalStorage} />} />
-        <Route path="/events" element={<Events sessionToken={sessionToken} />} />
+
+        {/* After login, show events for user and admin */}
+        <Route
+          path="/events"
+          element={
+            sessionToken ? (
+              <Events sessionToken={sessionToken} />
+            ) : (
+              <Auth updateLocalStorage={updateLocalStorage} />
+            )
+          }
+        />
+
+        {/* Admin-only: view sent reports */}
+        <Route
+          path="/admin/reports"
+          element={
+            isAdmin ? (
+              <SentReports sessionToken={sessionToken} />
+            ) : (
+              <div>Unauthorized</div>
+            )
+          }
+        />
+
+        {/* Other routes */}
         <Route path="/about" element={<About />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/privacy" element={<Privacy />} />
         <Route path="/terms" element={<Terms />} />
         <Route path="/report" element={<Report sessionToken={sessionToken} />} />
         <Route path="/addevents" element={<AddEvents sessionToken={sessionToken} />} />
-        {/* Add more routes as needed */}
+        <Route path="*" element={<div>Page Not Found</div>} />
       </Routes>
       <Footer />
     </Router>
@@ -50,3 +83,4 @@ function App() {
 }
 
 export default App;
+

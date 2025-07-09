@@ -27,12 +27,12 @@ export default function RSVPPage() {
         </label>
 
         <label>Will you attend?</label>
-            <select id="attendance" name="attendance">
-            <option value="" disabled selected>Select your response</option>
-            <option value="yes">Yes</option>
-            <option value="no">No</option>
-            <option value="maybe">Maybe</option>
-            </select>
+        <select id="attendance" name="attendance" defaultValue="">
+          <option value="" disabled>Select your response</option>
+          <option value="yes">Yes</option>
+          <option value="no">No</option>
+          <option value="maybe">Maybe</option>
+        </select>
 
         <button type="submit">Submit RSVP</button>
       </form>

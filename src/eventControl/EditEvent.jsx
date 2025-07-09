@@ -1,19 +1,19 @@
 import { useState } from 'react';
 import { Field, Input } from "@chakra-ui/react"
 
-export default function UpdateEvent({ events, sessionToken }) {
-  console.log("UpdateEvent component rendered" + events);
+export default function UpdateEvent({ event, sessionToken }) {
+  console.log("UpdateEvent component rendered" + event);
 
   // Initialize state with the event's current values
-  const [Title, setTitle] = useState('');
-  const [Description, setDescription] = useState('');
-  const [Location, setLocation] = useState('');
-  const [DateInput, setDateInput] = useState('');
-  const [TimeInput, setTimeInput] = useState('');
-  const [Category, setCategory] = useState('');
+  const [Title, setTitle] = useState(event.Title || '');
+  const [Description, setDescription] = useState(event.Description || '');
+  const [Location, setLocation] = useState(event.Location || '');
+  const [DateInput, setDateInput] = useState(event.Date || '');
+  const [TimeInput, setTimeInput] = useState(event.Time || '');
+  const [Category, setCategory] = useState(event.Category || '');
 
 
-  const handleAddEvent = async (e) => {
+  const handleUpdateEvent = async (e) => {
     e.preventDefault();
 
     const dateTimeString = `${DateInput}T${TimeInput}`;
@@ -22,7 +22,7 @@ export default function UpdateEvent({ events, sessionToken }) {
     // Validate date and time input
 
 
-    const url = `http://127.0.0.1:4000/events/${events._id}`; // Use the event's ID from props
+    const url = `http://127.0.0.1:4000/api/events/${event._id}`; // Use the event's ID from props
     // Assuming you want to update an event with a specific ID
     
     
@@ -63,7 +63,7 @@ export default function UpdateEvent({ events, sessionToken }) {
 
   return (
     <>
-     <form onSubmit={handleAddEvent}>
+     <form onSubmit={handleUpdateEvent}>
      <h2>Update Event</h2>
       <Field.Root required>
       <Field.Label>
@@ -147,7 +147,7 @@ export default function UpdateEvent({ events, sessionToken }) {
         <option value="Yoga Class">Yoga Clas</option>
       </select>
       
-      <button onClick={handleAddEvent}>UPDATE EVENT</button>
+      <button onClick={handleUpdateEvent}>UPDATE EVENT</button>
       </Field.Root>
     </form>
     </>

@@ -1,5 +1,6 @@
 import { useState } from 'react';
-import { Field, Input, Box, Card, Flex, Heading} from "@chakra-ui/react"
+import { Field, Input, Box, Card, Flex, Heading, Button, FileUpload, Float, useFileUploadContext } from "@chakra-ui/react"
+import { LuFileImage, LuX } from "react-icons/lu"
 import '@/assets/CreateEvent.css';
 
 export default function CreateEvent({ sessionToken }) {
@@ -9,51 +10,66 @@ export default function CreateEvent({ sessionToken }) {
   const [DateInput, setDateInput] = useState('');
   const [TimeInput, setTimeInput] = useState('');
   const [Category, setCategory] = useState('');
+  const [Image, setImage] = useState(null); // Store File object
 
   const handleAddEvent = async (e) => {
     e.preventDefault();
 
     const dateTimeString = `${DateInput}T${TimeInput}`;
-    // Create a Date object from the date and time inputs
     const date = new Date(dateTimeString);
-    // Validate date and time input
 
-    const body = { 
-        Title, 
-        Description, 
-        Location, 
-        date: date.toISOString(), // Convert to ISO string for consistency
-        time: date.toTimeString().split(' ')[0], // Extract time in HH:MM:SS format      
-        Category 
-    };
+    const formData = new FormData();
+    formData.append('Title', Title);
+    formData.append('Description', Description);
+    formData.append('Location', Location);
+    formData.append('date', date.toISOString());
+    formData.append('time', date.toTimeString().split(' ')[0]);
+    formData.append('Category', Category);
+    if (Image) formData.append('Image', Image);
 
     const url = "http://127.0.0.1:4000/api/events/event";
 
     try {
       const res = await fetch(url, {
         method: "POST",
-        body: JSON.stringify(body),
+        body: formData,
         headers: {
-          "Content-Type": "application/json",
           "authorization": sessionToken
         }
       });
 
       const data = await res.json();
       console.log("Event created:", data);
-
-      // Clear inputs
-      setTitle('');
-      setDescription('');
-      setLocation('');
-      setDateInput('');
-      setTimeInput('');
-      setCategory('');
-
     } catch (err) {
-      console.error("Event creation failed:", err);
+      console.error(err);
     }
   };
+
+  const FileUploadList = () => {
+    const fileUpload = useFileUploadContext()
+    const files = fileUpload.acceptedFiles
+    if (files.length === 0) return null
+    return (
+      <FileUpload.ItemGroup>
+        {files.map((file) => (
+          <FileUpload.Item
+            w="auto"
+            boxSize="10"
+            p="2"
+            file={file}
+            key={file.name}
+          >
+            <FileUpload.ItemPreviewImage />
+            <Float placement="top-end">
+              <FileUpload.ItemDeleteTrigger boxSize="4" layerStyle="fill.solid">
+                <LuX />
+              </FileUpload.ItemDeleteTrigger>
+            </Float>
+          </FileUpload.Item>
+        ))}
+      </FileUpload.ItemGroup>
+    )
+  }
 
   return (
     <Flex minH="83vh" justify="center" align="center">
@@ -115,7 +131,7 @@ export default function CreateEvent({ sessionToken }) {
         autoComplete="street-address"
         onChange={e => setLocation(e.target.value)}
       />
-
+  
       <Field.Label>
       Date <Field.RequiredIndicator />
       </Field.Label>
@@ -166,13 +182,21 @@ export default function CreateEvent({ sessionToken }) {
         <option value="Yard Sale">Yard Sale</option>
         <option value="Yoga Class">Yoga Class</option>
       </select>
+
+      <FileUpload.Root accept="image/*">
+      <FileUpload.HiddenInput />
+      <FileUpload.Trigger asChild>
+        <Button variant="outline" size="md" colorScheme="blue" leftIcon= {<LuFileImage />} onChange={e => setImage(e.target.files[0])}>
+          <LuFileImage /> Upload Images
+        </Button>
+      </FileUpload.Trigger>
+      <FileUploadList />
+      </FileUpload.Root>
       
-      <button onClick={handleAddEvent}>ADD EVENT</button>
+      <button onClick={handleAddEvent}>ADD EVENT</button> 
       </Field.Root>
       </Box>
      </Card.Root>
     </Flex>
-      
-  
   );
 }

@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import '@/assets/Auth.css'
 import { Field, Input, Button, Card, Stack } from "@chakra-ui/react"
 import Homepage from '../components/Homepage';
+import { useNavigate } from 'react-router-dom';
 
 export default function Auth({ updateLocalStorage }) {
   const [login, setLogin] = useState(true)
@@ -9,6 +10,7 @@ export default function Auth({ updateLocalStorage }) {
   const [lastName, setLastName] = useState("")
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
+  const navigate = useNavigate();
 
   const toggle = () => {
     setLogin(!login)
@@ -43,8 +45,10 @@ export default function Auth({ updateLocalStorage }) {
         return res.json()
       })
       .then(data => {
-        console.log(data)
-        updateLocalStorage(data.token)
+        if (data.token) {
+          updateLocalStorage(data.token);
+          navigate('/events');
+        }
       })
       .catch(err => console.error("Login/Register failed:", err))
   }
@@ -60,7 +64,7 @@ export default function Auth({ updateLocalStorage }) {
           // ----------------- LOGIN FORM -----------------
           <Card.Root maxW="sm">
             <Card.Header>
-              <Card.Title>Login</Card.Title>
+              <Card.Title></Card.Title>
               <Card.Description>
                 Enter your email and password
               </Card.Description>

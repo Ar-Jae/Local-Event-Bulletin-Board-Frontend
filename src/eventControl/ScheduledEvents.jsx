@@ -27,8 +27,8 @@ export default function Events({ sessionToken }) {
   };
 
   useEffect(() => {
-    fetchEvents();
-  }, []);
+    if (sessionToken) fetchEvents();
+  }, [sessionToken]);
 
   return (
     <>
