@@ -16,27 +16,31 @@ import AddEvents from './eventControl/CreateEvent';
 import SentReports from './pages/AdminDashboard/ReportCard'; // If you want admin to see reports
 import LogOut from './auth-admin/LogOut'; // Import LogOut component
 import RSVPPage from './eventControl/RSVPEvent'; // Import the RSVP page
+import Dashboard from './pages/AdminDashboard/ Dashboard'; // Import Dashboard component
+import ReportCard from './pages/AdminDashboard/ReportCard'; // Import ReportCard component
 
 
 function App() {
   const [sessionToken, setSessionToken] = useState(undefined);
+  const [isAdmin, setIsAdmin] = useState(false);
 
   useEffect(() => {
     const token = localStorage.getItem("token");
+    const isAdmin = localStorage.getItem("isAdmin") === 'true';
     console.log("Token from localStorage:", token); // Debugging token retrieval
     if (token) {
       setSessionToken(token);
+      setIsAdmin(isAdmin);
     }
   }, []);
 
-  const updateLocalStorage = newToken => {
-    console.log("Updating localStorage with token:", newToken); // Debugging token update
-    localStorage.setItem("token", newToken);
-    setSessionToken(newToken);
+  const updateLocalStorage = (token, isAdmin) => {
+    console.log("Updating localStorage with token:", token); // Debugging token update
+    localStorage.setItem('token', token);
+    localStorage.setItem('isAdmin', isAdmin);
+    setSessionToken(token);
+    setIsAdmin(isAdmin === 'true' || isAdmin === true);
   };
-
-  // Simple role check (replace with real logic as needed)
-  const isAdmin = sessionToken && sessionToken.startsWith("admin-");
 
   return (
     <Router>
@@ -59,17 +63,9 @@ function App() {
           }
         />
 
-        {/* Admin-only: view sent reports */}
-        <Route
-          path="/admin/reports"
-          element={
-            isAdmin ? (
-              <SentReports sessionToken={sessionToken} />
-            ) : (
-              <div>Unauthorized</div>
-            )
-          }
-        />
+        {/* Admin-only routes */}
+        <Route path="/admin/dashboard" element={isAdmin ? <Dashboard sessionToken={sessionToken} /> : <div>Unauthorized</div>} />
+        <Route path="/admin/reports" element={isAdmin ? <SentReports sessionToken={sessionToken} /> : <div>Unauthorized</div>}/>
 
         {/* Other routes */}
         <Route path="/rsvp/:eventId" element={<RSVPPage />} />
@@ -80,6 +76,7 @@ function App() {
         <Route path="/report" element={<Report sessionToken={sessionToken} />} />
         <Route path="/addevents" element={<AddEvents sessionToken={sessionToken} />} />
         <Route path="/logout" element={<LogOut />} />
+        <Route path="/reports" element={<ReportCard sessionToken={sessionToken} />} />
 
         {/* Catch-all route for 404 */}
         <Route path="*" element={<div>Page Not Found</div>} />

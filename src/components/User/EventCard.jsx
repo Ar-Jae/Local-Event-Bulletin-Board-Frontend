@@ -1,4 +1,4 @@
-import { Badge, Button, Card, Image, Text, Heading, Stack, SimpleGrid, Box,HStack} from "@chakra-ui/react";
+import { Badge, Button, Card, Image, SimpleGrid, Box,HStack} from "@chakra-ui/react";
 import { useNavigate } from 'react-router-dom';
 import '@/assets/EventCard.css';
 
@@ -11,6 +11,7 @@ function formatDateTime(dateString, timeString) {
   } else {
     // fallback for MM/DD/YYYY
     dateObj = new Date(Date.parse(dateString));
+    // Handle invalid date formats
   }
   if (isNaN(dateObj)) return "Invalid Date";
 

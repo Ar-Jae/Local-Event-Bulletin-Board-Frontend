@@ -1,16 +1,55 @@
 import React, { useState } from 'react';
 import '@/assets/ContactPage.css';
-import { Box, Card, Flex } from "@chakra-ui/react"
+import { Box,Input, Card, Flex } from "@chakra-ui/react"
 
-export default function ContactPage() {
-  const [submitted, setSubmitted] = useState(false);
+export default function ContactPage(sessionToken) {
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [message, setMessage] = useState('');
+  const [feedback, setFeedback] = useState('');
+  const [submitting, setSubmitting] = useState(false);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    setSubmitted(true);
+    setSubmitting(true);
     // Optionally, handle form data here (e.g., send to API)
-  };
 
+    const body = { name, email, message };
+    const url = "http://127.0.0.1:4000/api/contact/contact";
+
+    try {
+      const res = await fetch(url, {
+        method: "POST",
+        body: JSON.stringify(body),
+        headers: {
+          "Content-Type": "application/json",
+          "authorization": sessionToken
+        }
+      });
+
+      if (res.ok) {
+        setFeedback("Thank you for your message! We'll get back to you soon.");
+      }
+      else {
+        setFeedback("Failed to send message. Please try again.");
+      }
+    }
+    catch (err) {
+      setFeedback("Failed to send message. Please try again.");
+      console.error("Failed to send", err);
+    } finally {
+      setSubmitting(false);
+
+    }
+        
+    // Reset form fields
+    setName('');
+    setEmail('');
+    setMessage('');
+    setFeedback('');
+  }
+  // Render the contact page
+  
   return (
     <Flex minH="83vh" justify="center">
       <Card.Root
@@ -50,26 +89,27 @@ export default function ContactPage() {
             </section>
             <section className="contact-form">
               <h2>Quick Message</h2>
-              {submitted ? (
-                <p className="contact-success">Thank you for your message! We'll get back to you soon.</p>
-              ) : (
-                <form onSubmit={handleSubmit}>
+              
+              <form className="report-form" onSubmit={handleSubmit}>
                   <label>
                     Name<br />
-                    <input type="text" name="name" placeholder="Your Name" required />
+                    <Input type="text" value={name} name="name" id="name" placeholder="Your Name" onChange={e => setName(e.target.value)} required />
                   </label>
                   <label>
                     Email<br />
-                    <input type="email" name="email" placeholder="you@example.com" required />
+                    <Input type="email" value={email} name="email" id="email"  placeholder="you@example.com" onChange={e => setEmail(e.target.value)} required />
                   </label>
                   <label>
                     Message<br />
-                    <textarea name="message" rows="5" placeholder="What's on your mind?" required></textarea>
+                    <textarea type="text" value={message} name="message" id="message" rows="5" placeholder="What's on your mind?" onChange={e => setMessage(e.target.value)} required></textarea>
                   </label>
-                  <button type="submit">Send Message</button>
+                  <button type="submit" disabled={submitting}>
+                {submitting ? "Submitting..." : "Submit Message"}
+              </button>
                 </form>
-              )}
+              
             </section>
+            {feedback && <p className="report-feedback">{feedback}</p>}
           </div>
         </Box>
       </Card.Root>

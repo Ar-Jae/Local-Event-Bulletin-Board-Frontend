@@ -35,24 +35,25 @@ export default function AdminAuth({ updateLocalStorage }) {
       ? { email, password }
       : { firstName, lastName, email, password }
 
-    fetch(url, {
-      method: "POST",
-      body: JSON.stringify(body),
-      headers: new Headers({
-        "Content-Type": "application/json"
-      })
-    })
-      .then(res => {
-        if (!res.ok) throw new Error(`HTTP error! status: ${res.status}`)
-        return res.json()
-      })
-      .then(data => {
-        if (data.token) {
-          updateLocalStorage(data.token);
-          navigate('/events');
-        }
-      })
-      .catch(err => console.error("Login/Register failed:", err))
+    handleAuth(url, body);
+  }
+
+  const handleAuth = async (url, body) => {
+    try {
+      const response = await fetch(url, {
+        method: "POST",
+        body: JSON.stringify(body),
+        headers: new Headers({
+          "Content-Type": "application/json"
+        })
+      });
+      if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+      const data = await response.json();
+      updateLocalStorage(data.token, data.isAdmin);
+      navigate('/admin/dashboard');
+    } catch (err) {
+      console.error("Login/Register failed:", err);
+    }
   }
 
   return (

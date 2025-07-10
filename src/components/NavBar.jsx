@@ -27,7 +27,7 @@ export default function NavBar() {
           <Link to="/addevents" className="navbar-link">Add Events</Link>
           <Link to="/about" className="navbar-link">About</Link>
           <Link to="/contact" className="navbar-link">Contact</Link>
-          <Link to="/admin" className="navbar-link">Admin Login</Link>
+          <Link to="/admin" className="navbar-link">Admin Dashboard</Link>
           <div className="navbar-search">
           <Input
             placeholder="Search events..."
