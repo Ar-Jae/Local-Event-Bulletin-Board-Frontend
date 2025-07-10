@@ -1,14 +1,14 @@
 import '@/assets/SentReports.css';
 import React from 'react'
 import { useState, useEffect } from 'react';
-import { Card, Text, SimpleGrid, Box,HStack, Heading} from "@chakra-ui/react";
+import { Card, SimpleGrid, Box,HStack, Heading} from "@chakra-ui/react";
 
 
 export default function ReportCard({ sessionToken }) {
 
     const [reportedPosts, setReportedPosts] = useState([]);
     
-    const fetchReported = () => {
+    const fetchReport = () => {
       const url = "http://127.0.0.1:4000/api/reportedPost/reports";
   
       fetch(url, {
@@ -24,19 +24,17 @@ export default function ReportCard({ sessionToken }) {
     };
   
     useEffect(() => {
-      if (sessionToken) fetchReported();
-    }, [sessionToken]);
+      fetchReport(sessionToken);
+    }, []);
   
     return (
       <Box position="sticky" top="0" zIndex="sticky" py={4} px={6}
         _after={{ content: '""', position: "absolute", left: 0, right: 0, bottom: 0, height: "1px"}}
       >
         <SimpleGrid columns={{ base: 1, md: 2, lg: 3 }} gap={10}>
-          {reportedPosts.length === 0 ? (
-            <Text>No reports found.</Text>
-          ) : (
-            reportedPosts.map((post) => (
-              <Card.Root key={post._id} className="idk"
+          
+            {reportedPosts.map((post) => (
+              <Card.Root key={post._id}
                 bg="blackAlpha.700"
                 rounded="xl"
                 overflow="hidden"
@@ -50,11 +48,10 @@ export default function ReportCard({ sessionToken }) {
                 <Card.Description>{post.description}</Card.Description>
                 <Card.Description color="white.500">{post.detail}</Card.Description>
                 <HStack>
-                  {/* ...other content... */}
+                  <Card.Description color="white.500">Reported by: {post.email}</Card.Description>
                 </HStack>
               </Card.Root>
-            ))
-          )}
+            ))}
         </SimpleGrid>
       </Box>
     );
