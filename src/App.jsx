@@ -1,23 +1,25 @@
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import './App.css';
-import Auth from './auth-admin/User/Auth';
-import AdminAuth from './auth-admin/Admin/AdminAuth';
+import Auth from './auth/Auth';
+import AdminAuth from '../admin-dashboard/Admin/AdminAuth';
 import Events from './eventControl/ScheduledEvents';
 import Navigation from './components/NavBar';
 import Footer from './components/Footer';
 import BackDrop from './components/BackDrop';
-import About from './pages/User/About';
-import Contact from './pages/User/Contact';
-import Privacy from './pages/User/PrivacyPolicy';
-import Terms from './pages/User/TermsOfService';
-import Report from './pages/User/ReportPost';
+import About from './pages/About';
+import Contact from './pages/Contact';
+import Privacy from './pages/PrivacyPolicy';
+import Terms from './pages/TermsOfService';
+import Report from './pages/ReportPost';
 import AddEvents from './eventControl/CreateEvent';
-import SentReports from './pages/AdminDashboard/ReportCard'; // If you want admin to see reports
-import LogOut from './auth-admin/LogOut'; // Import LogOut component
+import SentReports from '../admin-dashboard/components/ReportCard'; // If you want admin to see reports
+import LogOut from './auth/LogOut'; // Import LogOut component
 import RSVPPage from './eventControl/RSVPEvent'; // Import the RSVP page
-import Dashboard from './pages/AdminDashboard/ Dashboard'; // Import Dashboard component
-import ReportCard from './pages/AdminDashboard/ReportCard'; // Import ReportCard component
+import Dashboard from '/admin-dashboard/pages/Dashboard'; // Import Dashboard component
+import ReportCard from '../admin-dashboard/components/ReportCard'; // Import ReportCard component
+import AdminProfiles from '../admin-dashboard/pages/AdminProfiles'; // Import AdminProfiles component
+import ContactCard from '../admin-dashboard/components/ContactCard';
 
 
 function App() {
@@ -66,6 +68,10 @@ function App() {
         {/* Admin-only routes */}
         <Route path="/admin/dashboard" element={isAdmin ? <Dashboard sessionToken={sessionToken} /> : <div>Unauthorized</div>} />
         <Route path="/admin/reports" element={isAdmin ? <SentReports sessionToken={sessionToken} /> : <div>Unauthorized</div>}/>
+        <Route path="/admin/users" element={isAdmin ? <AdminProfiles sessionToken={sessionToken} /> : <div>Unauthorized</div>} />
+        <Route path="/admin/contact" element={isAdmin ? <ContactCard sessionToken={sessionToken} /> : <div>Unauthorized</div>} />
+        <Route path="/admin/settings" element={isAdmin ? <div>Admin Settings Page</div> : <div>Unauthorized</div>} />
+        <Route path="/admin/sent-reports" element={isAdmin ? <ReportCard sessionToken={sessionToken} /> : <div>Unauthorized</div>} />
 
         {/* Other routes */}
         <Route path="/rsvp/:eventId" element={<RSVPPage />} />
@@ -87,4 +93,5 @@ function App() {
 }
 
 export default App;
+
 

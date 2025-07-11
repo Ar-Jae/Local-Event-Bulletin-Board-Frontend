@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import '@/assets/Events.css';
-import EventCard from '../components/User/EventCard';
-import LogOut from '../auth-admin/LogOut'
+import EventCard from '../components/EventCard';
+import LogOut from '../auth/LogOut'
 
 
 
