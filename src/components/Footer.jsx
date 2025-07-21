@@ -11,7 +11,7 @@ export default function Footer() {
         <p className="footer-logo">🪴 Friendly Fence Bulletin</p>
 
           <nav className="footer-links">
-          <Link to="/events" className="navbar-link">Home</Link>
+          
           <Link to="/privacy" className="navbar-link">Policy</Link>
           <Link to="/terms" className="navbar-link">Terms of Service</Link>
           <Link to="/report" className="navbar-link">Report a Post</Link>

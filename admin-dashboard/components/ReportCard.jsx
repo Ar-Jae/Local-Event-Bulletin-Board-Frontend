@@ -1,4 +1,4 @@
-import '@/assets/SentReports.css';
+
 import React from 'react'
 import { useState, useEffect } from 'react';
 import { Card, SimpleGrid, Box,HStack, Heading} from "@chakra-ui/react";
@@ -28,9 +28,12 @@ export default function ReportCard({ sessionToken }) {
     }, []);
   
     return (
+      
       <Box position="sticky" top="0" zIndex="sticky" py={4} px={6}
         _after={{ content: '""', position: "absolute", left: 0, right: 0, bottom: 0, height: "1px"}}
       >
+        <Heading as="h1" size="xl" mb={6} color="white">Reported Posts</Heading>
+       
         <SimpleGrid columns={{ base: 1, md: 2, lg: 3 }} gap={10}>
           
             {reportedPosts.map((post) => (
@@ -54,6 +57,8 @@ export default function ReportCard({ sessionToken }) {
             ))}
         </SimpleGrid>
       </Box>
+
+      
     );
   }
 // This code defines a React component called ReportCard that fetches and displays reported posts.

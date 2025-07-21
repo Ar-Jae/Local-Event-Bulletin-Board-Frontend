@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import '@/assets/ReportPost.css';
 import { Input, Box, Card, Flex } from "@chakra-ui/react";
 
@@ -9,6 +9,10 @@ export default function ReportPost({ sessionToken }) {
   const [email, setEmail] = useState('');
   const [feedback, setFeedback] = useState('');
   const [submitting, setSubmitting] = useState(false);
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   const handleReportPost = async (e) => {
     e.preventDefault();

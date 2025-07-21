@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import '@/assets/ContactPage.css';
 import { Box,Input, Card, Flex } from "@chakra-ui/react"
 
-export default function ContactPage(sessionToken) {
+export default function ContactPage({ sessionToken }) {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [message, setMessage] = useState('');

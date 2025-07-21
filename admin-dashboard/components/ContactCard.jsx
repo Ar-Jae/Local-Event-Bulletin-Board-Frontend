@@ -1,4 +1,4 @@
-import '@/assets/SentReports.css';
+
 import React from 'react'
 import { useState, useEffect } from 'react';
 import { Card, SimpleGrid, Box,HStack, Heading} from "@chakra-ui/react";

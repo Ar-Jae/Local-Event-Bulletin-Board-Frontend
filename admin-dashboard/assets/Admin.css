@@ -1,45 +1,53 @@
-.about-container {
-    max-width: 800px;
-    margin: 0 auto;
-    padding: 40px 20px;
-    font-family: Arial, sans-serif;
-    color: white;
-    line-height: 1.6;
-  }
-  
-  .about-title {
-    font-size: 2.5rem;
-    color: white;
-    margin-bottom: 20px;
-  }
-  
-  .about-intro {
-    font-size: 1.2rem;
-    margin-bottom: 16px;
-    color: white;
-  }
-  
-  .section-title {
-    font-size: 1.5rem;
-    margin-top: 40px;
-    margin-bottom: 12px;
-    color:white;
-  }
-  
-  
-  ol {
-    margin-left: 20px;
-    margin-bottom: 20px;
-  }
-  
-  a {
-    color: #1e88e5;
-    text-decoration: underline;
-  }
-  
-  .mission {
-    border-top: 1px solid #ddd;
-    padding-top: 20px;
-    margin-top: 40px;
-  }
-  
+body {
+  margin: 0;
+  font-family: sans-serif;
+}
+
+.app {
+  display: flex;
+}
+
+.sidebar {
+  width: 200px;
+  background: #111;
+  color: white;
+  height: 100vh;
+  padding: 20px;
+}
+
+.sidebar a {
+  display: block;
+  color: white;
+  margin: 10px 0;
+  text-decoration: none;
+}
+
+.content {
+  flex: 1;
+  padding: 20px;
+}
+
+.navbar {
+  background: "blackAlpha.700";
+  color: white;
+  padding: 10px;
+  display: flex;
+  justify-content: space-between;
+  width: 1000%
+
+}
+
+.card {
+  background: black;
+  padding: 20px;
+  margin: 10px;
+  display: inline-block;
+  width: 200px;
+  box-shadow: 0 0 5px rgba(0,0,0,0.1);
+}
+
+.charts {
+  margin-top: 20px;
+  display: flex;
+  gap: 20px;
+}

@@ -51,7 +51,9 @@ export default function AdminAuth({ updateLocalStorage }) {
       const data = await response.json();
       updateLocalStorage(data.token, data.isAdmin);
       navigate('/admin/dashboard');
-    } catch (err) {
+    } 
+    
+    catch (err) {
       console.error("Login/Register failed:", err);
     }
   }

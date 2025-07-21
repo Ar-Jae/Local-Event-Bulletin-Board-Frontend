@@ -1,8 +1,12 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import '@/assets/PrivacyPolicy.css';
 import { Box, Card, Flex } from "@chakra-ui/react";
 
 export default function PrivacyPolicy() {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   return (
 
     <Flex minH="100vh" justify="center">

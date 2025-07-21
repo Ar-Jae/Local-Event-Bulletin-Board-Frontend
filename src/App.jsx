@@ -16,9 +16,8 @@ import AddEvents from './eventControl/CreateEvent';
 import SentReports from '../admin-dashboard/components/ReportCard'; // If you want admin to see reports
 import LogOut from './auth/LogOut'; // Import LogOut component
 import RSVPPage from './eventControl/RSVPEvent'; // Import the RSVP page
-import Dashboard from '/admin-dashboard/pages/Dashboard'; // Import Dashboard component
+import Dashboard from '../admin-dashboard/pages/Dashboard'; // Import Dashboard component
 import ReportCard from '../admin-dashboard/components/ReportCard'; // Import ReportCard component
-import AdminProfiles from '../admin-dashboard/pages/AdminProfiles'; // Import AdminProfiles component
 import ContactCard from '../admin-dashboard/components/ContactCard';
 
 
@@ -68,10 +67,9 @@ function App() {
         {/* Admin-only routes */}
         <Route path="/admin/dashboard" element={isAdmin ? <Dashboard sessionToken={sessionToken} /> : <div>Unauthorized</div>} />
         <Route path="/admin/reports" element={isAdmin ? <SentReports sessionToken={sessionToken} /> : <div>Unauthorized</div>}/>
-        <Route path="/admin/users" element={isAdmin ? <AdminProfiles sessionToken={sessionToken} /> : <div>Unauthorized</div>} />
         <Route path="/admin/contact" element={isAdmin ? <ContactCard sessionToken={sessionToken} /> : <div>Unauthorized</div>} />
-        <Route path="/admin/settings" element={isAdmin ? <div>Admin Settings Page</div> : <div>Unauthorized</div>} />
         <Route path="/admin/sent-reports" element={isAdmin ? <ReportCard sessionToken={sessionToken} /> : <div>Unauthorized</div>} />
+        
 
         {/* Other routes */}
         <Route path="/rsvp/:eventId" element={<RSVPPage />} />
