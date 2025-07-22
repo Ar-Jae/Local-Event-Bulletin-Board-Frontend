@@ -1,4 +1,3 @@
-
 import React from 'react'
 import { useState, useEffect } from 'react';
 import { Card, SimpleGrid, Box,HStack, Heading} from "@chakra-ui/react";
@@ -37,21 +36,29 @@ export default function ReportCard({ sessionToken }) {
         <SimpleGrid columns={{ base: 1, md: 2, lg: 3 }} gap={10}>
           
             {reportedPosts.map((post) => (
-              <Card.Root key={post._id}
-                bg="blackAlpha.700"
+              <Card.Root
+                key={post._id}
+                bg="rgba(30,30,30,0.92)"
                 rounded="xl"
                 overflow="hidden"
-                boxShadow="md"
+                boxShadow="lg"
                 transition="all 0.2s"
-                _hover={{ boxShadow: "xl", transform: "translateY(-2px)" }}
+                _hover={{ boxShadow: "2xl", transform: "translateY(-4px) scale(1.01)" }}
+                p={6}
               >
-                <Heading as="h2" size="lg" color="white" mb={4}>
+                <Heading as="h2" size="md" color="#ffd700" mb={2}>
                   {post.post}
                 </Heading>
-                <Card.Description>{post.description}</Card.Description>
-                <Card.Description color="white.500">{post.detail}</Card.Description>
-                <HStack>
-                  <Card.Description color="white.500">Reported by: {post.email}</Card.Description>
+                <Card.Description color="#eee" mb={2}>
+                  {post.description}
+                </Card.Description>
+                <Card.Description color="#bbb" mb={2}>
+                  {post.detail}
+                </Card.Description>
+                <HStack mt={2}>
+                  <Card.Description color="#1e88e5" fontSize="sm">
+                    Reported by: {post.email}
+                  </Card.Description>
                 </HStack>
               </Card.Root>
             ))}

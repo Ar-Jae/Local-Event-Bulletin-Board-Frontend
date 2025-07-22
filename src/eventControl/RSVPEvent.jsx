@@ -1,4 +1,5 @@
 import React from 'react';
+import '@/assets/RSVPEvent.css';
 
 export default function RSVPPage() {
   return (

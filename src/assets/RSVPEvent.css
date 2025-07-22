@@ -1,0 +1,71 @@
+.rsvp-container {
+  max-width: 400px;
+  margin: 32px auto;
+  padding: 28px 18px;
+  background: rgba(0, 0, 0, 0.6);
+  border-radius: 10px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.12);
+  color: #fff;
+}
+
+.rsvp-container label {
+  display: block;
+  margin-bottom: 12px;
+  font-weight: 500;
+  color: #ffd700;
+}
+
+.rsvp-container input[type="text"],
+.rsvp-container input[type="email"],
+.rsvp-container select {
+  width: 100%;
+  padding: 8px 10px;
+  margin-top: 4px;
+  margin-bottom: 16px;
+  border: 1.5px solid #bbb;
+  border-radius: 5px;
+  background: rgba(0,0,0,0.4);
+  color: #fff;
+  font-size: 1em;
+  transition: border-color 0.2s;
+}
+
+.rsvp-container input:focus,
+.rsvp-container select:focus {
+  border-color: #ffd700;
+  outline: none;
+}
+
+.rsvp-container button[type="submit"] {
+  background: #ffd700;
+  color: #222;
+  border: none;
+  padding: 10px 22px;
+  border-radius: 5px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+  margin-top: 8px;
+  display: block;
+  width: 100%;
+}
+
+.rsvp-container button[type="submit"]:hover {
+  background: #1e88e5;
+  color: #fff;
+}
+
+.rsvp-note {
+  margin-top: 18px;
+  font-size: 0.97rem;
+  color: #bbb;
+  text-align: center;
+}
+
+/* Responsive adjustments */
+@media (max-width: 500px) {
+  .rsvp-container {
+    padding: 12px 4px;
+    font-size: 0.97rem;
+  }
+}

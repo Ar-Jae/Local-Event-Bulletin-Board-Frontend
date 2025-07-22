@@ -1,7 +1,7 @@
-
 import React from 'react'
 import { useState, useEffect } from 'react';
-import { Card, SimpleGrid, Box,HStack, Heading} from "@chakra-ui/react";
+import { Box, SimpleGrid, Card, Heading, Text, HStack } from "@chakra-ui/react";
+import '../assets/ContactCard.css';
 
 
 export default function ContactCard({ sessionToken }) {
@@ -28,31 +28,17 @@ export default function ContactCard({ sessionToken }) {
     }, []);
   
     return (
-      <Box position="sticky" top="0" zIndex="sticky" py={4} px={6}
-        _after={{ content: '""', position: "absolute", left: 0, right: 0, bottom: 0, height: "1px"}}
-      >
-        <SimpleGrid columns={{ base: 1, md: 2, lg: 3 }} gap={10}>
-          
-            {ContactCards.map((contact) => (
-              <Card.Root key={contact._id}
-                bg="blackAlpha.700"
-                rounded="xl"
-                overflow="hidden"
-                boxShadow="md"
-                transition="all 0.2s"
-                _hover={{ boxShadow: "xl", transform: "translateY(-2px)" }}
-              >
-                <Heading as="h2" size="lg" color="white" mb={4}>
-                  {contact.name}
-                </Heading>
-                <Card.Description>{contact.email}</Card.Description>
-                <Card.Description color="white.500">{contact.message}</Card.Description>
-                <HStack>
-                  <Card.Description color="white.500">Reported by: {contact.email}</Card.Description>
-                </HStack>
-              </Card.Root>
-            ))}
-        </SimpleGrid>
+      <Box position="sticky" top="0" zIndex="sticky" py={4} px={6}>
+        <div className="contact-card-grid">
+          {ContactCards.map((contact) => (
+            <div className="contact-card" key={contact._id}>
+              <h3 className="card-title">{contact.name}</h3>
+
+              <div className="card-detail">{contact.message}</div>
+              <div className="card-meta">Reported by: {contact.email}</div>
+            </div>
+          ))}
+        </div>
       </Box>
     );
   }
