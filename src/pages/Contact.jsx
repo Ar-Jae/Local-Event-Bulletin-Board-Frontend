@@ -12,6 +12,7 @@ export default function ContactPage({ sessionToken }) {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setSubmitting(true);
+    setFeedback("");
     // Optionally, handle form data here (e.g., send to API)
 
     const body = { name, email, message };
@@ -29,6 +30,9 @@ export default function ContactPage({ sessionToken }) {
 
       if (res.ok) {
         setFeedback("Thank you for your message! We'll get back to you soon.");
+        setName("");
+        setEmail("");
+        setMessage("");
       }
       else {
         setFeedback("Failed to send message. Please try again.");
@@ -41,14 +45,7 @@ export default function ContactPage({ sessionToken }) {
       setSubmitting(false);
 
     }
-        
-    // Reset form fields
-    setName('');
-    setEmail('');
-    setMessage('');
-    setFeedback('');
   }
-  // Render the contact page
   
   return (
     <Flex minH="83vh" justify="center">
