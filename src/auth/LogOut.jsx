@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from 'react';
+import '@/assets/LogOut.css';
+
 
 export default function LogOut() {
   const [sessionToken, setSessionToken] = useState(undefined);
@@ -17,9 +19,7 @@ export default function LogOut() {
   };
 
   return (
-    <div>
-      <p>Click the button below to log out.</p>
-      
+    <div className="logout-container">   
       {sessionToken ? (
         <button onClick={logout}>Logout</button>
       ) : (

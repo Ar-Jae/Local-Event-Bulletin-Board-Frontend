@@ -1,52 +1,114 @@
 .navbar {
-    border-bottom: 1px solid #ddd;
-    padding: 15px 20px;
-    font-family: Arial, sans-serif;
-    justify-content: space-between;
-  }
-  
+  border-bottom: 1px solid #ddd;
+  padding: 15px 20px;
+  justify-content: space-between;
+  background-color: rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.07); /* subtle shadow */
+  position: relative;
+  z-index: 10;
+  font-weight: bold;
+}
+
+.navbar-container {
+  max-width: 1000px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center; /* ensures vertical alignment */
+  width: 100%;
+}
+
+.navbar-logo {  
+  font-size: 2rem; /* slightly larger */
+  color: white;
+  cursor: pointer; /* indicate clickable */
+  text-decoration: none;
+  transition: color 0.2s;
+  display: flex;
+  align-items: center; /* vertical alignment */
+  height: 100%;
+  white-space: nowrap; /* prevent wrapping */
+}
+
+.navbar-logo:hover {
+  color: #ffd700; /* gold on hover */
+}
+
+.navbar-links {
+  display: flex;
+  gap: 20px;
+  align-items: center; /* vertical alignment */
+  margin-top: 0; /* remove top margin for alignment */
+  white-space: nowrap; /* prevent wrapping */
+}
+
+.navbar-links a {
+  color: white;
+  text-decoration: none;
+  font-size: 1rem;
+  padding: 8px 14px; /* better touch targets */
+  border-radius: 4px;
+  transition: background 0.2s, color 0.2s;
+  white-space: nowrap; /* prevent wrapping */
+}
+
+.navbar-links a:hover {
+  text-decoration: underline;
+  background: rgba(255,255,255,0.12);
+  color: #ffd700;
+}
+
+.navbar-search {
+  border: 2px solid rgba(0, 0, 0, 0.1);
+  color: white;
+  font-size: 1em;
+  margin: 0 0 0 20px; /* space from links */
+  display: flex;
+  align-items: center; /* vertical alignment */
+  width: 250px;
+}
+
+/* Responsive hamburger menu */
+@media (max-width: 700px) {
   .navbar-container {
-    max-width: 1000px;
-    margin: 0 auto;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-wrap: wrap;
+      flex-direction: column;
+      align-items: flex-start;
   }
-  
-  .navbar-logo {
-    font-family: 'Times New Roman', serif;
-    font-size: 2rem;
-    font-weight: bold;
-    color: white;
-  }
-  
   .navbar-links {
-    display: flex;
-    gap: 15px;
-    margin-top: 10px;
+      flex-direction: column;
+      width: 100%;
+      gap: 8px;
+      margin-top: 12px;
+      align-items: flex-start;
   }
-  
-  .navbar-links a {
-    color: white;
-    text-decoration: none;
-    font-size: 1rem;
+  .navbar-search {
+      width: 100%;
+      margin: 10px 0 0 0;
   }
-  
-  .navbar-links a:hover {
-    text-decoration: underline;
+}
+
+/* Add hamburger icon styles if you implement it in JS/JSX */
+.hamburger {
+  display: none;
+  flex-direction: column;
+  cursor: pointer;
+  margin-left: auto;
+}
+.hamburger span {
+  height: 3px;
+  width: 25px;
+  background: white;
+  margin: 4px 0;
+  border-radius: 2px;
+}
+@media (max-width: 700px) {
+  .hamburger {
+      display: flex;
   }
-  
-  
-  
-    
- .navbar-search {
-    border: 2px solid rgba(0, 0, 0, 0.5);
-    color: white;
-    padding: 10px;
-    width: 300px;
-    font-size: 1em;
-    margin: 10px 0;
-    background-color: rgba(0, 0, 0, 0.5);
-    display: inline;
+  .navbar-links {
+      display: none;
+  }
+  .navbar-links.active {
+      display: flex;
+  }
 }

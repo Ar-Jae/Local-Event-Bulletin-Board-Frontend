@@ -1,15 +1,6 @@
 input[type="text"],
 input[type="date"],
-input[type="time"]
-{
-    border: 2px solid #333;
-    color: white;
-    padding: 10px;
-    width: 300px;
-    font-size: 1em;
-    margin: 10px 0;
-}
-
+input[type="time"],
 select {
     border: 2px solid #333;
     color: white;
@@ -17,6 +8,18 @@ select {
     width: 300px;
     font-size: 1em;
     margin: 10px 0;
+    background: rgba(0,0,0,0.5);
+    border-radius: 5px;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+input[type="text"]:focus,
+input[type="date"]:focus,
+input[type="time"]:focus,
+select:focus {
+    border-color: #ffd700;
+    box-shadow: 0 0 4px #ffd70055;
+    outline: none;
 }
 
 button {
@@ -24,18 +27,40 @@ button {
     justify-content: center;
     align-items: center;
     height: 40px;
-    margin: 10px;
-    padding: 10px 15px;
+    margin: 10px 0;
+    padding: 10px 20px;
     font-size: 1em;
     cursor: pointer;
     border: none;
-    color: white;
+    color: #222;
     border-radius: 5px;
-    background-color: #333;
-    transition: background-color 0.3s ease;
+    background-color: #ffd700;
+    font-weight: bold;
+    transition: background-color 0.3s, color 0.2s;
 }
 
 button:hover {
-    background-color: #555;
+    background-color: #1e88e5;
+    color: #fff;
+}
+
+/* Add this new class */
+.button-center {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+@media (max-width: 500px) {
+    input[type="text"],
+    input[type="date"],
+    input[type="time"],
+    select {
+        width: 100%;
+        font-size: 0.97em;
+    }
+    button {
+        width: 100%;
+    }
 }
 

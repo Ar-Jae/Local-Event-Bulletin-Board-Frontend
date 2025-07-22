@@ -193,17 +193,20 @@ export default function CreateEvent({ sessionToken }) {
         <option value="Yoga Class">Yoga Class</option>
       </select>
 
-      <FileUpload.Root accept="image/*">
+      <FileUpload.Root accept="image">
       <FileUpload.HiddenInput />
       <FileUpload.Trigger asChild>
+        <div className="button-center">
         <Button variant="outline" size="md" colorScheme="blue" leftIcon= {<LuFileImage />} onChange={e => setImage(e.target.files[0])}>
           <LuFileImage /> Upload Images
         </Button>
+        </div>
       </FileUpload.Trigger>
       <FileUploadList />
       </FileUpload.Root>
-      
-      <button onClick={handleAddEvent}>ADD EVENT</button> 
+      <div className="button-center">
+      <button onClick={handleAddEvent}>ADD EVENT</button>
+      </div>
       </Field.Root>
       </Box>
      </Card.Root>

@@ -1,45 +1,68 @@
 .about-container {
     max-width: 800px;
-    margin: 0 auto;
-    padding: 40px 20px;
+    margin: 24px auto;
+    padding: 24px 12px;
     font-family: Arial, sans-serif;
     color: white;
     line-height: 1.6;
-  }
-  
-  .about-title {
-    font-size: 2.5rem;
-    color: white;
-    margin-bottom: 20px;
-  }
-  
-  .about-intro {
-    font-size: 1.2rem;
-    margin-bottom: 16px;
-    color: white;
-  }
-  
-  .section-title {
-    font-size: 1.5rem;
-    margin-top: 40px;
+    border-radius: 10px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.10);
+}
+
+.about-title {
+    font-size: 2rem;
+    color: #ffd700;
+    margin-bottom: 14px;
+    font-weight: bold;
+    letter-spacing: 1px;
+}
+
+.about-intro {
+    font-size: 1.08rem;
+    margin-bottom: 10px;
+    color: #eee;
+}
+
+.section-title {
+    font-size: 1.25rem;
+    margin-top: 28px;
+    margin-bottom: 8px;
+    color: #ffd700;
+    font-weight: bold;
+}
+
+ol {
+    margin-left: 18px;
     margin-bottom: 12px;
-    color:white;
-  }
-  
-  
-  ol {
-    margin-left: 20px;
-    margin-bottom: 20px;
-  }
-  
-  a {
+}
+
+a {
     color: #1e88e5;
     text-decoration: underline;
-  }
-  
-  .mission {
+    transition: color 0.2s;
+}
+
+a:hover {
+    color: #ffd700;
+    text-decoration: underline;
+}
+
+.mission {
     border-top: 1px solid #ddd;
     padding-top: 20px;
     margin-top: 40px;
-  }
-  
+}
+
+/* Responsive adjustments */
+@media (max-width: 600px) {
+    .about-container {
+        padding: 12px 4px;
+        font-size: 0.97rem;
+    }
+    .about-title {
+        font-size: 1.4rem;
+    }
+    .section-title {
+        font-size: 1.05rem;
+    }
+}

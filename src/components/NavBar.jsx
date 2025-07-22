@@ -21,7 +21,7 @@ export default function NavBar() {
     <header className="navbar">
       <div className="navbar-container">
         <Link to="/events" className="navbar-logo">
-          🪴 Friendly Fence 🪴
+          🪴Friendly Fence🪴
         </Link>
 
         <nav className="navbar-links">

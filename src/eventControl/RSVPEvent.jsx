@@ -34,7 +34,7 @@ export default function RSVPPage() {
           <option value="maybe">Maybe</option>
         </select>
 
-        <button type="submit">Submit RSVP</button>
+        <button type ="submit">Submit RSVP</button>
       </form>
 
       <p className="rsvp-note">

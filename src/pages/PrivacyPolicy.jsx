@@ -30,9 +30,14 @@ export default function PrivacyPolicy() {
       <p className="privacy-intro">
         Effective Date: July 1, 2025
       </p>
+      
 
       <p>
         At <strong>Friendly Fence Bulletin</strong>, your privacy matters. This policy explains what information we collect, how we use it, and your choices regarding your data.
+      </p>
+      
+      <p>
+        -----------------------------------------------------------------------------------------------------------------------------------------------
       </p>
 
       <section>

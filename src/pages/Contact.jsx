@@ -103,11 +103,12 @@ export default function ContactPage({ sessionToken }) {
                     Message<br />
                     <textarea type="text" value={message} name="message" id="message" rows="5" placeholder="What's on your mind?" onChange={e => setMessage(e.target.value)} required></textarea>
                   </label>
+                  <div className="button-center">
                   <button type="submit" disabled={submitting}>
-                {submitting ? "Submitting..." : "Submit Message"}
-              </button>
+                  {submitting ? "Submitting..." : "Submit Message"}
+                   </button>
+                  </div>
                 </form>
-              
             </section>
             {feedback && <p className="report-feedback">{feedback}</p>}
           </div>

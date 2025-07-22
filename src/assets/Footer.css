@@ -1,52 +1,85 @@
 .footer {
-    padding: 30px 20px;
+    padding: 16px 10px; /* reduced padding */
     border-top: 1px solid #ddd;
     color: white;
     font-family: Arial, sans-serif;
     font-size: 1rem;
-    width: 1000%
-  }
-  
-  .footer-inner {
+    font-weight: bold;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.07); /* subtle shadow */
+}
+
+.footer-inner {
     max-width: 800px;
     margin: 0 auto;
     text-align: center;
-  }
-  
-  .footer-logo {
-    font-size: 1.2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0; /* remove extra padding */
+}
+
+.footer-logo {
+    font-size: 1.1rem; /* slightly smaller */
     font-weight: bold;
-    color: white;
-    margin-bottom: 10px;
-  }
-  
-  .footer-links {
-    margin-bottom: 12px;
-  }
-  
-  .footer-links a {
-    margin: 0 10px;
-    color: white;
+    color: #ffd700;
+    margin-bottom: 4px; /* less space */
+    letter-spacing: 1px;
+}
+
+.footer-links {
+    margin-bottom: 4px; /* less space */
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px; /* tighter gap */
+    justify-content: center;
+}
+
+.footer-links a {
+    margin: 0 4px; /* less margin */
+    color: #fff;
     text-decoration: none;
-  }
-  
-  .footer-links a:hover {
+    padding: 2px 6px; /* smaller padding */
+    border-radius: 3px;
+    transition: background 0.2s, color 0.2s;
+    font-size: 0.97rem;
+}
+
+.footer-links a:hover {
     text-decoration: underline;
-    color: #1e88e5;
-  }
-  
-  .footer-copy {
-    color: white;
-    font-size: 0.85rem;
-  }
-  .footer-social {
-    margin-top: 15px;
-  }
-  .footer-social a {
-    margin: 0 8px;
+    background: #333;
+    color: #ffd700;
+}
+
+.footer-copy {
+    font-size: 0.9rem;
+    color: #bbb;
+    margin-top: 2px; /* less space */
+}
+
+.footer-social {
+    margin-top: 6px; /* less space */
+}
+
+.footer-social a {
+    margin: 0 4px; /* less margin */
     color: white;
     text-decoration: none;
-  }
-  .footer-social a:hover {
+}
+
+.footer-social a:hover {
     color: #1e88e5;
-  }
+}
+
+/* Responsive adjustments */
+@media (max-width: 600px) {
+    .footer-inner {
+        max-width: 100%;
+        padding: 0 4px;
+    }
+    .footer-links {
+        flex-direction: column;
+        gap: 3px;
+    }
+}

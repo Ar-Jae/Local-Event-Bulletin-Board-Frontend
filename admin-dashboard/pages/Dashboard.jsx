@@ -11,11 +11,7 @@ export default function AdminPage() {
     <>
     <WelcomeMessage />
     <div className="app">
-      <button>
-      <a href="/admin/users" style={{ textDecoration: 'none', color: 'inherit' }}>
-        Manage Users
-      </a>
-    </button>
+    <div className="button-grid">
     <button>
       <a href="/admin/reports" style={{ textDecoration: 'none', color: 'inherit' }}>
         View Reports
@@ -26,11 +22,18 @@ export default function AdminPage() {
         Contact Us
       </a>
     </button>
+      <button>
+      <a href="/admin/users" style={{ textDecoration: 'none', color: 'inherit' }}>
+        Manage Users
+      </a>
+    </button>
+    
     <button>
       <a href="/admin/events" style={{ textDecoration: 'none', color: 'inherit' }}>
         Manage Events
       </a>
       </button>
+      </div>
     </div>
     <LogOut />
     </>
