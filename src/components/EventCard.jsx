@@ -2,6 +2,7 @@ import { Badge, Button, Card, Image, SimpleGrid, Box, HStack } from "@chakra-ui/
 import { useNavigate } from 'react-router-dom';
 import '@/assets/EventCard.css';
 
+
 function formatDateTime(dateString, timeString) {
   // dateString: "2024-06-07T00:00:00.000Z" or "06/07/2024"
   // timeString: "14:30"
@@ -30,7 +31,7 @@ function formatDateTime(dateString, timeString) {
 }
 
 // Add isAdmin and handler props
-export default function EventCard({ events, isAdmin, onEdit, onDelete }) {
+export default function EventCard({ events, isAdmin, onDelete }) {
   const navigate = useNavigate();
 
   return (
@@ -39,60 +40,65 @@ export default function EventCard({ events, isAdmin, onEdit, onDelete }) {
     >
       <SimpleGrid columns={{ base: 1, md: 2, lg: 3 }} gap={10}>
 
-        {events.map((event) => (
+        {events.map(event => {
+          
+          return (
+            <Card.Root key={event._id}
+              bg="blackAlpha.700"
+              rounded="3xl"
+              overflow="hidden"
+              boxShadow="md"
+              transition="all 0.2s"
+              _hover={{
+                boxShadow: "xl",
+                transform: "translateY(-2px)"
+              }}
+            >
 
-          <Card.Root key={event._id}
-            bg="blackAlpha.700"
-            rounded="3xl"
-            overflow="hidden"
-            boxShadow="md"
-            transition="all 0.2s"
-            _hover={{
-              boxShadow: "xl",
-              transform: "translateY(-2px)"
-            }}
-          >
+              <Image
+                borderRadius="3xl"
+                objectFit="cover"
+                maxW="auto"
+                maxH="200px"
+                src={event.ImageUrl || "https://images.unsplash.com/photo-1667489022797-ab608913feeb?auto=format&fit=crop&w=800&q=60"}
+                alt="Event Image"
+              />
 
-            <Image
-              borderRadius="3xl"
-              objectFit="cover"
-              maxW="auto"
-              maxH="200px"
-              src={event.ImageUrl || "https://images.unsplash.com/photo-1667489022797-ab608913feeb?auto=format&fit=crop&w=800&q=60"}
-              alt="Event Image"
-            />
+              <Card.Body>
 
-            <Card.Body>
+                <Card.Title color="white" size="md">{event.Title}</Card.Title>
+                <Card.Description>{event.Description}</Card.Description>
+                <Card.Description color="white.500">{event.Location}</Card.Description>
+                <Card.Description>
+                  {event.Date && event.Time ? (
+                    <>
+                      {formatDateTime(event.Date, event.Time)}
+                    </>
+                  ) : (
+                    "Date/Time not available"
+                  )}
+                </Card.Description>
 
-              <Card.Title color="white" size="md">{event.Title}</Card.Title>
-              <Card.Description>{event.Description}</Card.Description>
-              <Card.Description color="white.500">{event.Location}</Card.Description>
-              <Card.Description>
-                {event.Date && event.Time ? (
+                <HStack>
+                  <Badge>{event.Category}</Badge>
+                </HStack>
+
+                <HStack mt={2}>
+
+                <Button onClick={() => navigate(`/rsvp/${event._id}`)}>RSVP</Button>
+                
+                {isAdmin && (
                   <>
-                    {formatDateTime(event.Date, event.Time)}
+                    <Button onClick={() => navigate(`/admin/events/edit/${event._id}`)}>Edit</Button>
+
+                    <Button colorScheme="red" onClick={() => onDelete(event._id)}>Delete</Button> 
                   </>
-                ) : (
-                  "Date/Time not available"
                 )}
-              </Card.Description>
-
-              <HStack>
-                <Badge>{event.Category}</Badge>
-              </HStack>
-
-              <Button onClick={() => navigate(`/rsvp/${event._id}`)}>RSVP</Button>
-              
-              {isAdmin && (
-                <>
-                  <Button onClick={() => onEdit(event)}>Edit</Button>
-                  <Button colorScheme="red" onClick={() => onDelete(event)}>Delete</Button>
-                </>
-              )}
-
-            </Card.Body>
-          </Card.Root>
-        ))}
+                </HStack>
+              </Card.Body>
+            </Card.Root>
+          );
+        })}
       </SimpleGrid>
     </Box>
   )
