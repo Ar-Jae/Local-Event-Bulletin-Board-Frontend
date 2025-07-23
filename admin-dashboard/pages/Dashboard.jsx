@@ -4,8 +4,6 @@ import LogOut from '@/auth/LogOut';
 
 import '../assets/Admin.css'; // Assuming you have a CSS file for styling
 
-
-
 export default function AdminPage() {
   return (
     <>
@@ -27,7 +25,6 @@ export default function AdminPage() {
         Manage Users
       </a>
     </button>
-    
     <button>
       <a href="/admin/events" style={{ textDecoration: 'none', color: 'inherit' }}>
         Manage Events
@@ -37,7 +34,5 @@ export default function AdminPage() {
     </div>
     <LogOut />
     </>
-    
   );
 }
-

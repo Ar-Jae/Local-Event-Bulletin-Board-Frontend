@@ -1,10 +1,11 @@
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import { Field, Input, Box, Card, Flex, Heading, Button, FileUpload, Float, useFileUploadContext } from "@chakra-ui/react"
 import { LuFileImage, LuX } from "react-icons/lu"
 import '@/assets/CreateEvent.css';
 
-export default function EditEvent({ sessionToken, event }) {
+export default function EditEvent({ sessionToken, event, onCancel, onUpdate }) {
+  
+
   const [Title, setTitle] = useState(event?.Title || '');
   const [Description, setDescription] = useState(event?.Description || '');
   const [Location, setLocation] = useState(event?.Location || '');
@@ -12,10 +13,18 @@ export default function EditEvent({ sessionToken, event }) {
   const [TimeInput, setTimeInput] = useState(event?.Time || '');
   const [Category, setCategory] = useState(event?.Category || '');
   const [Image, setImage] = useState(null);
-  const navigate = useNavigate();
+  
+
+  if (!event || !event._id) {
+    return <div>Loading event...</div>;
+  }
 
   const handleEditEvent = async (e) => {
     e.preventDefault();
+    if (!event || !event._id) {
+      console.error('Event or Event ID is missing');
+      return;
+    }
     const date = new Date(`${DateInput}T00:00:00Z`);
     const eventData = {
       Title,
@@ -26,21 +35,29 @@ export default function EditEvent({ sessionToken, event }) {
       Category,
       ImageUrl: Image ? Image.name : event?.ImageUrl, // or however your backend expects it
     };
-
+    
+    
+   const url = `http://127.0.0.1:4000/api/events/${event._id}`;
+  
     try {
-      const res = await fetch(`http://127.0.0.1:4000/api/events/${event._id}`, {
+      const res = await fetch(url, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
-          "authorization": sessionToken
+          "authorization": sessionToken   
         },
         body: JSON.stringify(eventData)
       });
-      const data = await res.json();
-      console.log("Event updated:", data);
-      navigate("/events");
+
+      if (res.ok) {
+        alert("Event updated successfully!");
+        if (onUpdate) onUpdate(); // Notify parent to refresh
+      } else {
+        alert("Failed to update event.");
+      }
     } catch (err) {
       console.error(err);
+      alert("Error updating event.");
     }
   };
 
@@ -176,8 +193,13 @@ export default function EditEvent({ sessionToken, event }) {
               <FileUploadList />
             </FileUpload.Root>
 
-            <div className="button-center">
-              <button onClick={handleEditEvent}>EDIT EVENT</button>
+            <div className="button-center" style={{ marginTop: "1rem" }}>
+              <Button colorScheme="green" onClick={handleEditEvent}>
+                Save Changes
+              </Button>
+              <Button variant="outline" colorScheme="red" ml={4} onClick={onCancel}>
+                Cancel
+              </Button>
             </div>
           </Field.Root>
         </Box>

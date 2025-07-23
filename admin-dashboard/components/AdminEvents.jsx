@@ -1,11 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import EventCard from '@/components/EventCard';
+import EditEventForm from '@/eventControl/EditEvent';
 import LogOut from '/src/auth/LogOut';
-
 
 export default function AdminEvents({ sessionToken, isAdmin }) {
   const [events, setEvents] = useState([]);
- 
+  const [selectedEvent, setSelectedEvent] = useState(null);
+  
+  // ✅ Fetch events from the API
+
  
   const fetchEvents = () => {
     const url = "http://127.0.0.1:4000/api/events/events";
@@ -23,7 +26,7 @@ export default function AdminEvents({ sessionToken, isAdmin }) {
 
   useEffect(() => {
     if (sessionToken) fetchEvents();
-  }, []);
+  }, [sessionToken]);
 
   const handleDeleteEvent = async (eventId) => {
     const confirmDelete = window.confirm("Are you sure you want to delete this event?");
@@ -50,16 +53,45 @@ export default function AdminEvents({ sessionToken, isAdmin }) {
     }
   };
 
+  // ✅ Conditionally render edit form
+  if (selectedEvent) {
+    return (
+      <EditEventForm
+        event={selectedEvent}
+        sessionToken={sessionToken}
+        onCancel={() => setSelectedEvent(null)}
+        onUpdate={() => {
+          setSelectedEvent(null);
+          fetchEvents();
+        }}
+      />
+    );
+  }
+  
   return (
     <div>
-      <h1>Admin Events Dashboard</h1>
-      <EventCard
-        events={events}
-        isAdmin={isAdmin}
-        onDelete={handleDeleteEvent}
+    {!selectedEvent ? (
+      <>
+        <h1>Admin Events Dashboard</h1>
+        <EventCard
+          events={events}
+          isAdmin={isAdmin}
+          onDelete={handleDeleteEvent}
+          onEdit={(event) => setSelectedEvent(event)} // Pass full event object
+        />
+        <LogOut />
+      </>
+    ) : (
+      <EditEventForm
+        event={selectedEvent}
+        sessionToken={sessionToken}
+        onCancel={() => setSelectedEvent(null)}
+        onUpdate={() => {
+          fetchEvents();
+          setSelectedEvent(null);
+        }}
       />
-      <p>Click the button below to log out.</p>
-      <LogOut />
-    </div>
+    )}
+  </div>
   );
 }

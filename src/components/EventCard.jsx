@@ -31,7 +31,7 @@ function formatDateTime(dateString, timeString) {
 }
 
 // Add isAdmin and handler props
-export default function EventCard({ events, isAdmin, onDelete }) {
+export default function EventCard({ events, isAdmin, onDelete, onEdit }) {
   const navigate = useNavigate();
 
   return (
@@ -89,8 +89,8 @@ export default function EventCard({ events, isAdmin, onDelete }) {
                 
                 {isAdmin && (
                   <>
-                    <Button onClick={() => navigate(`/admin/events/edit/${event._id}`)}>Edit</Button>
-
+                    <Button onClick={() => onEdit(event)}>Edit</Button> {/* ⬅ Pass full event */}
+    
                     <Button colorScheme="red" onClick={() => onDelete(event._id)}>Delete</Button> 
                   </>
                 )}
