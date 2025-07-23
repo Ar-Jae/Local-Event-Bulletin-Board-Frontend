@@ -4,6 +4,7 @@ import EditEventForm from '@/eventControl/EditEvent';
 import LogOut from '/src/auth/LogOut';
 
 export default function AdminEvents({ sessionToken, isAdmin }) {
+
   const [events, setEvents] = useState([]);
   const [selectedEvent, setSelectedEvent] = useState(null);
   
