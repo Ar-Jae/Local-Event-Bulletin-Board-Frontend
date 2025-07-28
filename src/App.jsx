@@ -17,6 +17,7 @@ import SentReports from '../admin-dashboard/components/ReportCard'; // If you wa
 import LogOut from './auth/LogOut'; // Import LogOut component
 import RSVPPage from './eventControl/RSVPEvent'; // Import the RSVP page
 import Dashboard from '../admin-dashboard/pages/Dashboard'; // Import Dashboard component
+import ManageRequests from '../admin-dashboard/components/ManageRequests';
 import ReportCard from '../admin-dashboard/components/ReportCard'; // Import ReportCard component
 import ContactCard from '../admin-dashboard/components/ContactCard';
 import AdminEvents from '../admin-dashboard/components/AdminEvents'; // Import AdminEvents component
@@ -70,6 +71,14 @@ function App() {
             ) : (
               <AdminAuth updateLocalStorage={updateLocalStorage} />
             )
+          }
+        />
+        <Route
+          path="/admin/requests"
+          element={
+            isAdmin
+              ? <ManageRequests sessionToken={sessionToken} isAdmin={isAdmin} />
+              : <div>Unauthorized</div>
           }
         />
 
