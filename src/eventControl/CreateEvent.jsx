@@ -89,10 +89,9 @@ export default function CreateEvent({ sessionToken }) {
       transform: "translateY(-2px)"}}>
 
      <Box
-        position="sticky" top="0" zIndex="sticky" py={4} px={6}
+        position="sticky" top="0" zIndex="sticky" py={4} px={6} bg="#222" color="#fff" aria-label="Create Event Form Section"
       >
-        
-      <Heading textAlign="center">Add New Event</Heading>
+      <Heading textAlign="center" color="#fff">Add New Event</Heading>
 
       <Field.Root required>
       <Field.Label>
@@ -108,6 +107,8 @@ export default function CreateEvent({ sessionToken }) {
         name="Title"
         id="Title"
         placeholder="Enter event name"
+        aria-required="true"
+        aria-label="Event Title"
         onChange={e => setTitle(e.target.value)}
       />
 
@@ -121,11 +122,13 @@ export default function CreateEvent({ sessionToken }) {
         autoCorrect="on"
         spellCheck="true"
         maxLength="100"
-        style={{ width: '100%', padding: '8px', border: '2px solid #333' }}
+        style={{ width: '100%', padding: '8px', border: '2px solid #333', background: '#222', color: '#fff' }}
         value={Description}
         name="Description"
         id="Description"
         placeholder="Enter event description"
+        aria-required="true"
+        aria-label="Event Description"
         onChange={e => setDescription(e.target.value)}
       />
   
@@ -139,6 +142,8 @@ export default function CreateEvent({ sessionToken }) {
         id="Location"
         placeholder="Enter event location"
         autoComplete="street-address"
+        aria-required="true"
+        aria-label="Event Location"
         onChange={e => setLocation(e.target.value)}
       />
   
@@ -151,6 +156,8 @@ export default function CreateEvent({ sessionToken }) {
         placeholder="Enter event dare"
         name="DateInput"
         id="DateInput"
+        aria-required="true"
+        aria-label="Event Date"
         onChange={e => setDateInput(e.target.value)}
       />
 
@@ -163,6 +170,8 @@ export default function CreateEvent({ sessionToken }) {
         placeholder="Eg. 12:30"
         name="TimeInput"
         id="TimeInput"
+        aria-required="true"
+        aria-label="Event Time"
         onChange={e => setTimeInput(e.target.value)}
       />
 
@@ -174,6 +183,8 @@ export default function CreateEvent({ sessionToken }) {
         onChange={e => setCategory(e.target.value)}
         name="Category"
         id="Category"
+        aria-required="true"
+        aria-label="Event Category"
       >
         <option value="">Select Category</option>
         <option value="Art Show">Art Show</option>
@@ -198,14 +209,14 @@ export default function CreateEvent({ sessionToken }) {
       <FileUpload.Trigger asChild>
         <div className="button-center">
         <Button variant="outline" size="md" colorScheme="blue" leftIcon= {<LuFileImage />} onChange={e => setImage(e.target.files[0])}>
-          <LuFileImage /> Upload Images
+          <LuFileImage /> <span aria-label="Upload Images">Upload Images</span>
         </Button>
         </div>
       </FileUpload.Trigger>
       <FileUploadList />
       </FileUpload.Root>
       <div className="button-center">
-      <button onClick={handleAddEvent}>ADD EVENT</button>
+      <button onClick={handleAddEvent} aria-label="Add Event" style={{background:'#0057b8',color:'#fff',borderRadius:'6px',padding:'8px 16px',border:'none'}}>ADD EVENT</button>
       </div>
       </Field.Root>
       </Box>

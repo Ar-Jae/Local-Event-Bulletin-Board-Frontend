@@ -71,28 +71,55 @@ export default function AdminEvents({ sessionToken, isAdmin }) {
   
   return (
     <div>
-    {!selectedEvent ? (
-      <>
-        <h1>Admin Events Dashboard</h1>
-        <EventCard
-          events={events}
-          isAdmin={isAdmin}
-          onDelete={handleDeleteEvent}
-          onEdit={(event) => setSelectedEvent(event)} // Pass full event object
+      {!selectedEvent ? (
+        <>
+          <h1>Admin Events Dashboard</h1>
+          {/* Pending Events Section */}
+          <h2>Pending Events</h2>
+          {events.filter(e => e.status === 'pending').length === 0 ? (
+            <p>No pending events.</p>
+          ) : (
+            events.filter(e => e.status === 'pending').map(event => (
+              <Box key={event._id} bg="yellow.100" p={3} mb={2} borderRadius="md">
+                <strong>{event.Title}</strong> - {event.Description}
+                <Button colorScheme="green" size="sm" ml={2} onClick={async () => {
+                  await fetch(`http://127.0.0.1:4000/api/events/approve/${event._id}`, {
+                    method: 'PUT',
+                    headers: { 'Content-Type': 'application/json', 'authorization': sessionToken }
+                  });
+                  fetchEvents();
+                }}>Approve</Button>
+                <Button colorScheme="red" size="sm" ml={2} onClick={async () => {
+                  await fetch(`http://127.0.0.1:4000/api/events/reject/${event._id}`, {
+                    method: 'PUT',
+                    headers: { 'Content-Type': 'application/json', 'authorization': sessionToken }
+                  });
+                  fetchEvents();
+                }}>Reject</Button>
+              </Box>
+            ))
+          )}
+          {/* All Events Section */}
+          <h2>All Events</h2>
+          <EventCard
+            events={events}
+            isAdmin={isAdmin}
+            onDelete={handleDeleteEvent}
+            onEdit={(event) => setSelectedEvent(event)}
+          />
+          <LogOut />
+        </>
+      ) : (
+        <EditEventForm
+          event={selectedEvent}
+          sessionToken={sessionToken}
+          onCancel={() => setSelectedEvent(null)}
+          onUpdate={() => {
+            fetchEvents();
+            setSelectedEvent(null);
+          }}
         />
-        <LogOut />
-      </>
-    ) : (
-      <EditEventForm
-        event={selectedEvent}
-        sessionToken={sessionToken}
-        onCancel={() => setSelectedEvent(null)}
-        onUpdate={() => {
-          fetchEvents();
-          setSelectedEvent(null);
-        }}
-      />
-    )}
-  </div>
+      )}
+    </div>
   );
 }
