@@ -1,5 +1,4 @@
-import React from 'react'
-import { useState, useEffect } from 'react';
+import React, { useCallback, useState, useEffect } from 'react';
 import { Box } from "@chakra-ui/react";
 import '../assets/ContactCard.css';
 
@@ -8,9 +7,8 @@ export default function ContactCard({ sessionToken }) {
 
     const [ContactCards, setContactCards] = useState([]);
     
-    const fetchReport = () => {
+    const fetchReport = useCallback(() => {
       const url = "http://127.0.0.1:4000/api/contact/contacts";
-  
       fetch(url, {
         method: "GET",
         headers: {
@@ -21,11 +19,11 @@ export default function ContactCard({ sessionToken }) {
         .then(res => res.json())
         .then(data => setContactCards(data))
         .catch(err => console.error(err));
-    };
+    }, [sessionToken]);
   
     useEffect(() => {
       fetchReport(sessionToken);
-    }, []);
+    }, [fetchReport, sessionToken]);
   
     return (
       <Box position="sticky" top="0" zIndex="sticky" py={4} px={6}>
@@ -42,5 +40,3 @@ export default function ContactCard({ sessionToken }) {
       </Box>
     );
   }
-// This code defines a React component called ReportCard that fetches and displays reported posts.
-// It uses Chakra UI components for styling and layout.

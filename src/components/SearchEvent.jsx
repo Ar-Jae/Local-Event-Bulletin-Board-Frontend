@@ -1,5 +1,5 @@
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { Box, Flex, Heading, Input, Select, Button } from "@chakra-ui/react";
 
 const SearchEvent = ({ onResults }) => {
@@ -8,7 +8,7 @@ const SearchEvent = ({ onResults }) => {
   const [date, setDate] = useState("");
   const [location, setLocation] = useState("");
 
-  const handleSearch = async () => {
+  const handleSearch = useCallback(async () => {
     const params = new URLSearchParams();
     if (searchTerm) params.append("title", searchTerm);
     if (category) params.append("category", category);
@@ -17,12 +17,11 @@ const SearchEvent = ({ onResults }) => {
     const res = await fetch(`/api/events/search?${params.toString()}`);
     const data = await res.json();
     onResults(data);
-  };
+  }, [searchTerm, category, date, location, onResults]);
 
   useEffect(() => {
     handleSearch();
-    // eslint-disable-next-line
-  }, [searchTerm, category, date, location]);
+  }, [searchTerm, category, date, location, handleSearch]);
 
   return (
     <Box position="sticky" top="0" zIndex="sticky" bg="white" boxShadow="sm" py={4} px={6}>

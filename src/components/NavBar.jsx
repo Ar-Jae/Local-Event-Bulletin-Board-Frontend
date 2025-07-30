@@ -12,7 +12,6 @@ export default function NavBar() {
 
   const [searchTerm, setSearchTerm] = useState("");
   
-    console.log("Value of our session token", sessionToken)
   useEffect(() => {
     const token = localStorage.getItem("token");
     setSessionToken(token);
@@ -20,7 +19,9 @@ export default function NavBar() {
     if (user) {
       try {
         setUserId(JSON.parse(user)._id);
-      } catch {}
+      } catch {
+        // Failed to parse user from localStorage
+      }
     }
   },[])
   

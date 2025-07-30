@@ -14,7 +14,6 @@ export default function Sidebar() {
         <Link to="/admin/reports">Reports</Link>
         <Link to="/admin/events">Events</Link>
         <Link to="/admin/contact">Contacts</Link>
-        {/* Add more links as needed */}
       </nav>
       <div className="sidebar-footer">
         <LogOut />

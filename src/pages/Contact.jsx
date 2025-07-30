@@ -13,7 +13,6 @@ export default function ContactPage({ sessionToken }) {
     e.preventDefault();
     setSubmitting(true);
     setFeedback("");
-    // Optionally, handle form data here (e.g., send to API)
 
     const body = { name, email, message };
     const url = "http://127.0.0.1:4000/api/contact/contact";
