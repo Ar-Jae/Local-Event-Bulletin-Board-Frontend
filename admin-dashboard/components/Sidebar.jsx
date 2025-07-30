@@ -13,6 +13,7 @@ export default function Sidebar() {
         <Link to="/admin/dashboard">Dashboard</Link>
         <Link to="/admin/reports">Reports</Link>
         <Link to="/admin/events">Events</Link>
+        <Link to="/admin/users">Users</Link>
         <Link to="/admin/contact">Contacts</Link>
       </nav>
       <div className="sidebar-footer">

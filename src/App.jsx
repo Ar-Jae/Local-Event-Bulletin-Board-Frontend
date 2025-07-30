@@ -1,4 +1,4 @@
-import AnalyticsDashboard from '../admin-dashboard/pages/AnalyticsDashboard';
+import Homepage from './components/Homepage';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import './App.css';
@@ -24,7 +24,7 @@ import ContactCard from '../admin-dashboard/components/ContactCard';
 import AdminEvents from '../admin-dashboard/components/AdminEvents'; // Import AdminEvents component
 import Users from '../admin-dashboard/components/Users'; // Import Users component
 import EditEvent from './eventControl/EditEvent';
-import UserProfile from './pages/UserProfile';
+
 
 
 function App() {
@@ -55,11 +55,12 @@ function App() {
       <BackDrop />
       <Routes>
         <Route
-          path="/admin/analytics"
+          path="/"
           element={
-            isAdmin ? <AnalyticsDashboard sessionToken={sessionToken} /> : <div>Unauthorized</div>
+            sessionToken ? <Events sessionToken={sessionToken} /> : <Homepage />
           }
         />
+        
         {/* User dashboard route */}
         <Route
           path="/events"
@@ -142,15 +143,10 @@ function App() {
         <Route path="/addevents" element={<AddEvents sessionToken={sessionToken} />} />
         <Route path="/logout" element={<LogOut />} />
         <Route path="/reports" element={<ReportCard sessionToken={sessionToken} />} />
-        <Route
-          path="/profile"
-          element={
-            sessionToken ? <UserProfile userId={sessionToken?.user?._id} /> : <Auth updateLocalStorage={updateLocalStorage} />
-          }
-        />
+        
 
         {/* Catch-all route for 404 */}
-        <Route path="*" element={<div>Page Not Found</div>} />
+        <Route path="*" element={<Homepage />} />
       </Routes>
       <Footer />
     </Router>

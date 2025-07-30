@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import { Input } from "@chakra-ui/react";
-import NotificationDropdown from './NotificationDropdown';
+
 import { useState, useEffect } from 'react';
 import '@/assets/NavBar.css';
 
@@ -48,10 +48,6 @@ export default function NavBar() {
               borderColor="#222"
             />
           </div>
-          {/* Notification Bell */}
-          {userId && sessionToken && (
-            <NotificationDropdown userId={userId} sessionToken={sessionToken} />
-          )}
         </nav>
       </div>
     </header>
