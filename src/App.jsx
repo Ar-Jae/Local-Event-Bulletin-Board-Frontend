@@ -1,3 +1,4 @@
+import AnalyticsDashboard from '../admin-dashboard/pages/AnalyticsDashboard';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import './App.css';
@@ -17,8 +18,13 @@ import SentReports from '../admin-dashboard/components/ReportCard'; // If you wa
 import LogOut from './auth/LogOut'; // Import LogOut component
 import RSVPPage from './eventControl/RSVPEvent'; // Import the RSVP page
 import Dashboard from '../admin-dashboard/pages/Dashboard'; // Import Dashboard component
+import ManageRequests from '../admin-dashboard/components/ManageRequests';
 import ReportCard from '../admin-dashboard/components/ReportCard'; // Import ReportCard component
 import ContactCard from '../admin-dashboard/components/ContactCard';
+import AdminEvents from '../admin-dashboard/components/AdminEvents'; // Import AdminEvents component
+import Users from '../admin-dashboard/components/Users'; // Import Users component
+import EditEvent from './eventControl/EditEvent';
+import UserProfile from './pages/UserProfile';
 
 
 function App() {
@@ -48,28 +54,83 @@ function App() {
       <Navigation />
       <BackDrop />
       <Routes>
-        {/* Login routes */}
-        <Route path="/" element={<Auth updateLocalStorage={updateLocalStorage} />} />
-        <Route path="/admin" element={<AdminAuth updateLocalStorage={updateLocalStorage} />} />
-
-        {/* After login, show events for user and admin */}
+        <Route
+          path="/admin/analytics"
+          element={
+            isAdmin ? <AnalyticsDashboard sessionToken={sessionToken} /> : <div>Unauthorized</div>
+          }
+        />
+        {/* User dashboard route */}
         <Route
           path="/events"
           element={
+            sessionToken
+              ? <Events sessionToken={sessionToken} />
+              : <Auth updateLocalStorage={updateLocalStorage} />
+          }
+        />
+
+        {/* Admin dashboard route */}
+        <Route
+          path="/admin/dashboard"
+          element={
             sessionToken ? (
-              <Events sessionToken={sessionToken} />
+              <Dashboard sessionToken={sessionToken} />
             ) : (
-              <Auth updateLocalStorage={updateLocalStorage} />
+              <AdminAuth updateLocalStorage={updateLocalStorage} />
             )
+          }
+        />
+        <Route
+          path="/admin/requests"
+          element={
+            isAdmin
+              ? <ManageRequests sessionToken={sessionToken} isAdmin={isAdmin} />
+              : <div>Unauthorized</div>
           }
         />
 
         {/* Admin-only routes */}
-        <Route path="/admin/dashboard" element={isAdmin ? <Dashboard sessionToken={sessionToken} /> : <div>Unauthorized</div>} />
-        <Route path="/admin/reports" element={isAdmin ? <SentReports sessionToken={sessionToken} /> : <div>Unauthorized</div>}/>
-        <Route path="/admin/contact" element={isAdmin ? <ContactCard sessionToken={sessionToken} /> : <div>Unauthorized</div>} />
-        <Route path="/admin/sent-reports" element={isAdmin ? <ReportCard sessionToken={sessionToken} /> : <div>Unauthorized</div>} />
-        
+        <Route
+          path="/admin/reports"
+          element={
+            isAdmin
+              ? <SentReports sessionToken={sessionToken} isAdmin={isAdmin} />
+              : <div>Unauthorized</div>
+          }
+        />
+        <Route
+          path="/admin/contact"
+          element={
+            isAdmin
+              ? <ContactCard sessionToken={sessionToken} isAdmin={isAdmin} />
+              : <div>Unauthorized</div>
+          }
+        />
+        <Route
+          path="/admin/users"
+          element={
+            isAdmin
+              ? <Users sessionToken={sessionToken} isAdmin={isAdmin} />
+              : <div>Unauthorized</div>
+          }
+        />
+        <Route
+          path="/admin/events/edit/:eventId"
+          element={
+            isAdmin
+              ? <EditEvent sessionToken={sessionToken} isAdmin={isAdmin} />
+              : <div>Unauthorized</div>
+          }
+        />
+        <Route
+          path="/admin/events"
+          element={
+            isAdmin
+              ? <AdminEvents sessionToken={sessionToken} isAdmin={isAdmin} />
+              : <div>Unauthorized</div>
+          }
+        />
 
         {/* Other routes */}
         <Route path="/rsvp/:eventId" element={<RSVPPage />} />
@@ -81,6 +142,12 @@ function App() {
         <Route path="/addevents" element={<AddEvents sessionToken={sessionToken} />} />
         <Route path="/logout" element={<LogOut />} />
         <Route path="/reports" element={<ReportCard sessionToken={sessionToken} />} />
+        <Route
+          path="/profile"
+          element={
+            sessionToken ? <UserProfile userId={sessionToken?.user?._id} /> : <Auth updateLocalStorage={updateLocalStorage} />
+          }
+        />
 
         {/* Catch-all route for 404 */}
         <Route path="*" element={<div>Page Not Found</div>} />

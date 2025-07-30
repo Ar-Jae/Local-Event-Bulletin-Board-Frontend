@@ -1,10 +1,9 @@
 import React from 'react'
 
-export default function AccessRequests() {
+export default function Users() {
   return (
     <div>
-      fvskjvisdo
+      
     </div>
   )
 }
-

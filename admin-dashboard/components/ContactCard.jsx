@@ -1,6 +1,6 @@
 import React from 'react'
 import { useState, useEffect } from 'react';
-import { Box, SimpleGrid, Card, Heading, Text, HStack } from "@chakra-ui/react";
+import { Box } from "@chakra-ui/react";
 import '../assets/ContactCard.css';
 
 

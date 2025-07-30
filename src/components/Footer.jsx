@@ -8,7 +8,7 @@ export default function Footer() {
   return (
     <footer className="footer">
       <div className="footer-inner">
-        <p className="footer-logo">🪴 Friendly Fence Bulletin</p>
+        <p className="footer-logo">🪴Friendly Fence Bulletin🪴</p>
 
           <nav className="footer-links">
           
