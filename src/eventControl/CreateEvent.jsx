@@ -88,9 +88,8 @@ export default function CreateEvent({ sessionToken }) {
       _hover={{ boxShadow: "xl", 
       transform: "translateY(-2px)"}}>
 
-     <Box
-        position="sticky" top="0" zIndex="sticky" py={4} px={6} bg="#222" color="#fff" aria-label="Create Event Form Section"
-      >
+     <Box position="sticky" top="0" zIndex="sticky" py={4} px={6} textAlign="center">
+      
       <Heading textAlign="center" color="#fff">Add New Event</Heading>
 
       <Field.Root required>
