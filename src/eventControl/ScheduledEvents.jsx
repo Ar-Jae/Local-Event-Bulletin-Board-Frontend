@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import '@/assets/Events.css';
+import '/src/assets/Events.css';
 import EventCard from '../components/EventCard';
 import LogOut from '../auth/LogOut'
 

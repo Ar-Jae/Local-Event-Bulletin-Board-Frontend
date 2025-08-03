@@ -1,6 +1,6 @@
 
 import React from 'react';
-import '@/assets/BackDrop.css';
+import '/src/assets/BackDrop.css';
 
 export default function BackDrop() {
   // Renders a full-screen video background styled by BackDrop.css

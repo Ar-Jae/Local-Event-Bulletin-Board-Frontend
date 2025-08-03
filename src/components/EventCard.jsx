@@ -1,6 +1,6 @@
 import { Badge, Button, Card, Image, SimpleGrid, Box, HStack } from "@chakra-ui/react";
 import { useNavigate } from 'react-router-dom';
-import '@/assets/EventCard.css';
+import '/src/assets/EventCard.css';
 
 
 function formatDateTime(dateString, timeString) {

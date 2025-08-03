@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import '@/assets/ReportPost.css';
+import '/src/assets/RSVPEvent.css';
 import { Input, Box, Card, Flex } from "@chakra-ui/react";
 
 export default function ReportPost({ sessionToken }) {

@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
-import WelcomeMessage from '../components/WelcomeMessage';
-import LogOut from '@/auth/LogOut';
+import WelcomeMessage from '/admin-dashboard/components/WelcomeMessage.jsx';
+import LogOut from '/src/auth/LogOut.jsx';
 
 
 import '../assets/Admin.css';

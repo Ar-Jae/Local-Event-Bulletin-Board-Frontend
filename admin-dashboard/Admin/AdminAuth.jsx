@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
-import '@/assets/AdminAuth.css'
+import '/src/assets/AdminAuth.css'
 import { Field, Input, Button, Card, Stack } from "@chakra-ui/react"
-import Homepage from '@/components/Homepage';
+import Homepage from '/src/components/Homepage.jsx';
 import { useNavigate } from 'react-router-dom';
 
 export default function AdminAuth({ updateLocalStorage }) {

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import '@/assets/LogOut.css';
+import '/src/assets/LogOut.css';
 
 
 export default function LogOut() {

@@ -1,7 +1,7 @@
 import { useState, useEffect} from 'react';
 import { Field, Input, Box, Card, Flex, Heading, Button, FileUpload, Float, useFileUploadContext } from "@chakra-ui/react"
 import { LuFileImage, LuX } from "react-icons/lu"
-import '@/assets/CreateEvent.css';
+import '../assets/CreateEvent.css';
 
 export default function EditEvent({ sessionToken, event, onCancel, onUpdate }) {
    useEffect(() => {

@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 import { Input } from "@chakra-ui/react";
 
 import { useState, useEffect } from 'react';
-import '@/assets/NavBar.css';
+import '/src/assets/NavBar.css';
 
 
 export default function NavBar() {

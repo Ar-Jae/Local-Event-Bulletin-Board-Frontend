@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import '@/assets/PrivacyPolicy.css';
+import '/src/assets/PrivacyPolicy.css';
 import { Box, Card, Flex } from "@chakra-ui/react";
 
 export default function PrivacyPolicy() {

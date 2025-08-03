@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Field, Input, Box, Card, Flex, Heading, Button, FileUpload, Float, useFileUploadContext } from "@chakra-ui/react"
 import { LuFileImage, LuX } from "react-icons/lu"
-import '@/assets/CreateEvent.css';
+import '/src/assets/LogOut.css';
 
 export default function CreateEvent({ sessionToken }) {
   const [Title, setTitle] = useState('');

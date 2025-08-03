@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import '@/assets/TermsOfService.css';
+import '/src/assets/TermsOfService.css';
 import { Box, Card, Flex } from "@chakra-ui/react";
 
 export default function TermsOfService() {

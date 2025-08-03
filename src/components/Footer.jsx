@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import React from 'react';
-import '@/assets/Footer.css';
+import '/src/assets/Footer.css';
 
 
 export default function Footer() {

@@ -1,7 +1,7 @@
+import './App.css';
 import Homepage from './components/Homepage';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import { useState, useEffect } from 'react';
-import './App.css';
 import Auth from './auth/Auth';
 import AdminAuth from '../admin-dashboard/Admin/AdminAuth';
 import Events from './eventControl/ScheduledEvents';
@@ -143,8 +143,6 @@ function App() {
         <Route path="/addevents" element={<AddEvents sessionToken={sessionToken} />} />
         <Route path="/logout" element={<LogOut />} />
         <Route path="/reports" element={<ReportCard sessionToken={sessionToken} />} />
-        
-
         {/* Catch-all route for 404 */}
         <Route path="*" element={<Homepage />} />
       </Routes>

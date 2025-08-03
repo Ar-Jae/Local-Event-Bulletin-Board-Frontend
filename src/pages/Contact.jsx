@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import '@/assets/ContactPage.css';
+import '../assets/ContactPage.css';
 import { Box,Input, Card, Flex } from "@chakra-ui/react"
 
 export default function ContactPage({ sessionToken }) {

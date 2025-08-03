@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import EventCard from '@/components/EventCard';
-import EditEventForm from '@/eventControl/EditEvent';
+import EventCard from '/src/components/EventCard.jsx';
+import EditEventForm from '/src/eventControl/EditEvent.jsx';
 import LogOut from '/src/auth/LogOut';
 
 export default function AdminEvents({ sessionToken, isAdmin }) {

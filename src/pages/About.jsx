@@ -1,4 +1,4 @@
-import '@/assets/AboutPage.css'; // Import the CSS file
+import '/src/assets/AboutPage.css'; // Import the CSS file
 import { Box, Card, Flex} from "@chakra-ui/react"
 
 export default function AboutPage() {

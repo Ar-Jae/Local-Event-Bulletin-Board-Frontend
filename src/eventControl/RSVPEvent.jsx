@@ -1,5 +1,5 @@
 import React from 'react';
-import '@/assets/RSVPEvent.css';
+import '/src/assets/LogOut.css';
 
 export default function RSVPPage() {
   return (
