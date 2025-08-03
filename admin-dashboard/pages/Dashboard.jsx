@@ -9,13 +9,24 @@ export default function AdminPage() {
 
 
   useEffect(() => {
-    // Fetch pending admin requests from backend
-    fetch('http://127.0.0.1:4000/api/adminUser/pending')
-      .then(res => res.json())
-      // .then(data => (data)) // No-op removed
-      .catch(err => console.error('Failed to fetch requests:', err));
-  }, []);
-
+  fetch('http://127.0.0.1:4000/api/adminUser/pending')
+    .then(async (res) => {
+      if (!res.ok) {
+        const text = await res.text();
+        console.error('Error response:', res.status, text);
+        return;
+      }
+      return res.json();
+    })
+    .then((data) => {
+      if (data) {
+        console.log('Pending admins:', data);
+      }
+    })
+    .catch((err) => {
+      console.error('Network error:', err.message);
+    });
+}, []);
 
 
   return (
