@@ -72,18 +72,19 @@
 @media (max-width: 700px) {
   .navbar-container {
       flex-direction: column;
-      align-items: flex-start;
+      align-items: center;
   }
   .navbar-links {
+      display: flex; /* Ensure links are visible */
       flex-direction: column;
       width: 100%;
-      gap: 8px;
-      margin-top: 12px;
-      align-items: flex-start;
+      gap: 10px;
+      margin-top: 15px;
+      align-items: center;
   }
   .navbar-search {
       width: 100%;
-      margin: 10px 0 0 0;
+      margin: 15px 0 0 0;
   }
 }
 
@@ -103,12 +104,12 @@
 }
 @media (max-width: 700px) {
   .hamburger {
-      display: flex;
+      display: none; /* Hide hamburger for now as we are stacking links */
   }
-  .navbar-links {
+  /* .navbar-links {
       display: none;
   }
   .navbar-links.active {
       display: flex;
-  }
+  } */
 }

@@ -35,10 +35,10 @@ export default function EventCard({ events, isAdmin, onDelete, onEdit }) {
   const navigate = useNavigate();
 
   return (
-    <Box position="sticky" top="0" zIndex="sticky" py={4} px={6}
+    <Box position="sticky" top="0" zIndex="sticky" py={4} px={{ base: 2, md: 6 }}
       _after={{ content: '""', position: "absolute", left: 0, right: 0, bottom: 0, height: "1px" }}
     >
-      <SimpleGrid columns={{ base: 1, md: 2, lg: 3 }} gap={10}>
+      <SimpleGrid columns={{ base: 1, md: 2, lg: 3 }} gap={{ base: 4, md: 10 }}>
 
         {events.map(event => {
           
@@ -58,7 +58,7 @@ export default function EventCard({ events, isAdmin, onDelete, onEdit }) {
               <Image
                 borderRadius="3xl"
                 objectFit="cover"
-                maxW="auto"
+                width="100%"
                 maxH="200px"
                 src={event.ImageUrl || "https://images.unsplash.com/photo-1667489022797-ab608913feeb?auto=format&fit=crop&w=800&q=60"}
                 alt="Event Image"

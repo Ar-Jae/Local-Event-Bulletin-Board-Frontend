@@ -2,7 +2,8 @@ input[type="email"] {
     border: 2px solid rgba(0, 0, 0, 0.5);
     color: white;
     padding: 10px;
-    width: 300px;
+    width: 100%;
+    max-width: 300px;
     font-size: 1em;
     margin: 10px 0;
     background-color: rgba(0, 0, 0, 0.5);
@@ -11,7 +12,8 @@ input[type="password"] {
     border: 2px solid rgba(0, 0, 0, 0.5);
     color: white;
     padding: 10px;
-    width: 300px;
+    width: 100%;
+    max-width: 300px;
     font-size: 1em;
     margin: 10px 0;
     background-color: rgba(0, 0, 0, 0.5);
@@ -21,7 +23,8 @@ input[type="firstName"] {
     border: 2px solid rgba(0, 0, 0, 0.5);
     color: rgb(0, 0, 0);
     padding: 10px;
-    width: 300px;
+    width: 100%;
+    max-width: 300px;
     font-size: 1em;
     margin: 10px 0;
     background-color: rgba(0, 0, 0, 0.5);
@@ -31,7 +34,8 @@ input[type="lastName"] {
     border: 2px solid rgba(0, 0, 0, 0.5);
     color: rgb(0, 0, 0);
     padding: 10px;
-    width: 300px;
+    width: 100%;
+    max-width: 300px;
     font-size: 1em;
     margin: 10px 0;
     background-color: rgba(0, 0, 0, 0.5);
