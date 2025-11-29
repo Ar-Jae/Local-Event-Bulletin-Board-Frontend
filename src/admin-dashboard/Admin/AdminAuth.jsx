@@ -60,14 +60,6 @@ export default function AdminAuth({ updateLocalStorage }) {
   }
 
   const handleAuth = async (url, body) => {
-    // Hardcoded login check for demo purposes
-    if (email === "ethan.brooks56@example.com" && password === "123456") {
-      console.log("Using hardcoded admin credentials");
-      updateLocalStorage("fake-admin-token", true);
-      navigate('/admin/dashboard');
-      return;
-    }
-
     try {
       const response = await fetch(url, {
         method: "POST",
