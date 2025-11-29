@@ -2,7 +2,6 @@ import './App.css';
 import Homepage from './components/Homepage';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import { useState, useEffect } from 'react';
-import Auth from './auth/Auth';
 import AdminAuth from './admin-dashboard/Admin/AdminAuth';
 import Events from './eventControl/ScheduledEvents';
 import Navigation from './components/NavBar';
@@ -53,19 +52,13 @@ function App() {
       <Routes>
         <Route
           path="/"
-          element={
-            sessionToken ? <Events sessionToken={sessionToken} /> : <Auth updateLocalStorage={updateLocalStorage} />
-          }
+          element={<Events sessionToken={sessionToken} />}
         />
         
         {/* User dashboard route */}
         <Route
           path="/events"
-          element={
-            sessionToken
-              ? <Events sessionToken={sessionToken} />
-              : <Auth updateLocalStorage={updateLocalStorage} />
-          }
+          element={<Events sessionToken={sessionToken} />}
         />
 
         {/* Admin dashboard route */}

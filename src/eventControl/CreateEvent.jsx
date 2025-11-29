@@ -37,8 +37,7 @@ export default function CreateEvent({ sessionToken }) {
       const res = await fetch(url, {
         method: "POST",
         headers: {
-          "Content-Type": "application/json",
-          "authorization": sessionToken   
+          "Content-Type": "application/json"
         },
         body: JSON.stringify(eventData)
       });
