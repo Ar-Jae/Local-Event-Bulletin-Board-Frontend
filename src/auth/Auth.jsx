@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import '/src/assets/Auth.css'
 import { Field, Input, Button, Card, Stack } from "@chakra-ui/react"
-import Homepage from '/src/components/Homepage.jsx';
+import Homepage from '../components/Homepage.jsx';
 import { useNavigate } from 'react-router-dom';
 
 export default function Auth({ updateLocalStorage }) {

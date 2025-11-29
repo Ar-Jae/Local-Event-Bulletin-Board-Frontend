@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom';
 import '../assets/Admin.css';
-import LogOut from '/src/auth/LogOut';
+import LogOut from '../../auth/LogOut';
 
 export default function Sidebar() {
   return (

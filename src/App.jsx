@@ -3,7 +3,7 @@ import Homepage from './components/Homepage';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import Auth from './auth/Auth';
-import AdminAuth from '../admin-dashboard/Admin/AdminAuth';
+import AdminAuth from './admin-dashboard/Admin/AdminAuth';
 import Events from './eventControl/ScheduledEvents';
 import Navigation from './components/NavBar';
 import Footer from './components/Footer';
@@ -14,15 +14,15 @@ import Privacy from './pages/PrivacyPolicy';
 import Terms from './pages/TermsOfService';
 import Report from './pages/ReportPost';
 import AddEvents from './eventControl/CreateEvent';
-import SentReports from '../admin-dashboard/components/ReportCard'; // If you want admin to see reports
+import SentReports from './admin-dashboard/components/ReportCard'; // If you want admin to see reports
 import LogOut from './auth/LogOut'; // Import LogOut component
 import RSVPPage from './eventControl/RSVPEvent'; // Import the RSVP page
-import Dashboard from '../admin-dashboard/pages/Dashboard'; // Import Dashboard component
-import ManageRequests from '../admin-dashboard/components/ManageRequests';
-import ReportCard from '../admin-dashboard/components/ReportCard'; // Import ReportCard component
-import ContactCard from '../admin-dashboard/components/ContactCard';
-import AdminEvents from '../admin-dashboard/components/AdminEvents'; // Import AdminEvents component
-import Users from '../admin-dashboard/components/Users'; // Import Users component
+import Dashboard from './admin-dashboard/pages/Dashboard'; // Import Dashboard component
+import ManageRequests from './admin-dashboard/components/ManageRequests';
+import ReportCard from './admin-dashboard/components/ReportCard'; // Import ReportCard component
+import ContactCard from './admin-dashboard/components/ContactCard';
+import AdminEvents from './admin-dashboard/components/AdminEvents'; // Import AdminEvents component
+import Users from './admin-dashboard/components/Users'; // Import Users component
 import EditEvent from './eventControl/EditEvent';
 
 
@@ -34,7 +34,6 @@ function App() {
   useEffect(() => {
     const token = localStorage.getItem("token");
     const isAdmin = localStorage.getItem("isAdmin") === 'true';
-    console.log("Token from localStorage:", token); // Debugging token retrieval
     if (token) {
       setSessionToken(token);
       setIsAdmin(isAdmin);
@@ -42,13 +41,11 @@ function App() {
   }, []);
 
   const updateLocalStorage = (token, isAdmin) => {
-    console.log("Updating localStorage with token:", token); // Debugging token update
     localStorage.setItem('token', token);
     localStorage.setItem('isAdmin', isAdmin);
     setSessionToken(token);
     setIsAdmin(isAdmin === 'true' || isAdmin === true);
   };
-
   return (
     <Router>
       <Navigation />
@@ -57,7 +54,7 @@ function App() {
         <Route
           path="/"
           element={
-            sessionToken ? <Events sessionToken={sessionToken} /> : <Homepage />
+            sessionToken ? <Events sessionToken={sessionToken} /> : <Auth updateLocalStorage={updateLocalStorage} />
           }
         />
         
