@@ -46,7 +46,7 @@ function App() {
     setIsAdmin(isAdmin === 'true' || isAdmin === true);
   };
   return (
-    <Router>
+    <Router basename="/Local-Event-Bulletin-Board-Frontend">
       <Navigation />
       <BackDrop />
       <Routes>

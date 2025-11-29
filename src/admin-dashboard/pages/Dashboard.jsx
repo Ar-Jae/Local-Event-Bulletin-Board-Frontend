@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import WelcomeMessage from '../components/WelcomeMessage.jsx';
 import LogOut from '../../auth/LogOut.jsx';
 
@@ -18,32 +19,31 @@ export default function AdminPage() {
 
   return (
     <>
-      <WelcomeMessage />
         <div className="button-grid">
           <button>
-            <a href="/admin/reports" style={{ textDecoration: 'none', color: 'inherit' }}>
+            <Link to="/admin/reports" style={{ textDecoration: 'none', color: 'inherit' }}>
               View Reports
-            </a>
+            </Link>
           </button>
           <button>
-            <a href="/admin/contact" style={{ textDecoration: 'none', color: 'inherit' }}>
+            <Link to="/admin/contact" style={{ textDecoration: 'none', color: 'inherit' }}>
               Contact Us
-            </a>
+            </Link>
           </button>
           <button>
-            <a href="/admin/users" style={{ textDecoration: 'none', color: 'inherit' }}>
+            <Link to="/admin/users" style={{ textDecoration: 'none', color: 'inherit' }}>
               Manage Users
-            </a>
+            </Link>
           </button>
           <button>
-            <a href="/admin/events" style={{ textDecoration: 'none', color: 'inherit' }}>
+            <Link to="/admin/events" style={{ textDecoration: 'none', color: 'inherit' }}>
               Manage Events
-            </a>
+            </Link>
           </button>
           <button>
-            <a href="/admin/requests" style={{ textDecoration: 'none', color: 'inherit' }}>
+            <Link to="/admin/requests" style={{ textDecoration: 'none', color: 'inherit' }}>
               Manage Requests
-            </a>
+            </Link>
           </button>
         </div>
      
